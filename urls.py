@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
-
+        url(r'^$','scheduler.views.home_view'),
+        url(r'^logout$','scheduler.views.logout_view'),
                        )
