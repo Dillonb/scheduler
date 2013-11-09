@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from scheduler.forms import EventForm
 
 def home_view(request):
     return render(request,"scheduler/base.html")
@@ -52,4 +53,9 @@ def register_view(request):
 def account_view(request):
     return render(request, "scheduler/account.html")
     
-
+def create_event_view(request):
+    form = EventForm(data=request.POST)
+    if request.method == 'POST':
+        pass
+    else:
+        return render(request, "scheduler/createevent.html",{'form':form})

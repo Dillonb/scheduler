@@ -1,0 +1,9 @@
+{% extends "scheduler/base.html" %}
+
+{% block body %}
+
+<form action="/createevent">
+    {% csrf_token %}
+    {{ form.as_p }}
+</form>
+{% endblock %}
