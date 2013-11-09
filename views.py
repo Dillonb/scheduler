@@ -1,8 +1,8 @@
+
 from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-
 
 def home_view(request):
     return render(request,"scheduler/base.html")
@@ -45,3 +45,4 @@ def register_view(request):
     return render(request, "scheduler/register.html", {
         'form': form,
     })
+

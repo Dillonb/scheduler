@@ -29,6 +29,24 @@ class Event(models.Model):
             (VISIBILITY_PRIVATE, "Private")
             )
     
-    schedule = models.ForeignKey(Schedule)
-    visibility = models.IntegerField(choices=VISIBILITY_CHOICES)
+    schedule = models.ForeignKey(Schedule) # Parent schedule
+    visibility = models.IntegerField(choices=VISIBILITY_CHOICES) # Visibility permissions
+    
+    start_time = models.TimeField() # Holds the time the event starts
+    end_time = models.TimeField() # Holds the time the event ends
+
+    start_date = models.DateField() # Holds the FIRST DAY that the event happens on
+    end_date = models.DateField() # Holds the LAST DAY that the event happens on
+
+    # Shows which days the event happens on
+    sunday = models.BooleanField()
+    monday = models.BooleanField()
+    tuesday = models.BooleanField()
+    wednesday = models.BooleanField()
+    thursday = models.BooleanField()
+    friday = models.BooleanField()
+    saturday = models.BooleanField()
+    name = models.CharField(max_length=50) # Name of the event. Short and sweet.
+    location = models.CharField(max_length=250) # The location of the event. Address?
+    description = models.TextField() # Description of event
 
