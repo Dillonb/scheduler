@@ -3,10 +3,12 @@ from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 def home_view(request):
     return render(request,"scheduler/base.html")
 
+#TODO: Support @login_required's ?next feature... 
 def login_view(request):
     form = AuthenticationForm(data=request.POST)
     if form.is_valid():
@@ -20,7 +22,7 @@ def login_view(request):
                 return HttpResponse("User not active.")
         else:
             return HttpResponse("User invalid.")
-        return HttpResponse("Logged in successfully.")
+        return HttpResponseRedirect("/account")
     else:
         return render(request,"scheduler/login.html", {"form":form})
 
@@ -45,4 +47,9 @@ def register_view(request):
     return render(request, "scheduler/register.html", {
         'form': form,
     })
+
+@login_required
+def account_view(request):
+    return render(request, "scheduler/account.html")
+    
 
