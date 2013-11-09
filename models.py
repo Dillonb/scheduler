@@ -46,6 +46,7 @@ class Event(models.Model):
     thursday = models.BooleanField()
     friday = models.BooleanField()
     saturday = models.BooleanField()
+
     name = models.CharField(max_length=50) # Name of the event. Short and sweet.
     location = models.CharField(max_length=250) # The location of the event. Address?
     description = models.TextField() # Description of event
