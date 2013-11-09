@@ -1,8 +1,8 @@
-from django.contrib.auth import logout
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
 
 def home_view(request):
     return render(request,"scheduler/base.html")
@@ -33,3 +33,15 @@ def is_loggedin_view(request):
         return HttpResponse("You are logged in.")
     else:
         return HttpResponse("You are not logged in.")
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            return HttpResponseRedirect("/")
+    else:
+        form = UserCreationForm()
+    return render(request, "scheduler/register.html", {
+        'form': form,
+    })
