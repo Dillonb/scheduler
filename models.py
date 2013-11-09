@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import admin
 
-# Create your models here.
+
 class Schedule(models.Model):
     VISIBILITY_PUBLIC = 0
     VISIBILITY_FRIENDSONLY = 1
@@ -51,3 +52,5 @@ class Event(models.Model):
     location = models.CharField(max_length=250) # The location of the event. Address?
     description = models.TextField() # Description of event
 
+admin.site.register(Schedule)
+admin.site.register(Event)
