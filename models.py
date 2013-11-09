@@ -16,6 +16,9 @@ class Schedule(models.Model):
     creator = models.ForeignKey(User)
     visibility = models.IntegerField(choices=VISIBILITY_CHOICES)
 
+    def __str__(self):
+        return "%s %s"%(self.creator, self.visibility)
+
 class Event(models.Model):
     VISIBILITY_INHERIT = -1
     VISIBILITY_PUBLIC = 0
@@ -51,6 +54,9 @@ class Event(models.Model):
     name = models.CharField(max_length=50) # Name of the event. Short and sweet.
     location = models.CharField(max_length=250) # The location of the event. Address?
     description = models.TextField() # Description of event
+
+    def __str__(self):
+        return "%s's event"%(self.schedule.creator.username)
 
 admin.site.register(Schedule)
 admin.site.register(Event)
