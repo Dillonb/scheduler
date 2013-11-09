@@ -1,7 +1,7 @@
 {% extends "scheduler/base.html" %}
 {% block title %}Login{% endblock %}
 {% block body %}
-<form action="/login" method="post">
+<form action="/accounts/login" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit">
