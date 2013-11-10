@@ -2,6 +2,7 @@
 {% block title %}Account{% endblock %}
 {% block body %}
 Account page...
+<p><a href="/accounts/createschedule/">Create a New Schedule</a></p>
 <ul>
     {% for schedule in schedules %}
     <li><a href="/createevent/{{ schedule.id }}">{{ schedule }}</a></li>

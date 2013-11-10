@@ -1,5 +1,5 @@
 from django.forms import ModelForm, DateInput
-from scheduler.models import Event
+from scheduler.models import Event, Schedule
 
 class EventForm(ModelForm):
     class Meta:
@@ -11,3 +11,8 @@ class EventForm(ModelForm):
                 'start_date': DateInput(attrs={'class':'datepicker'}),
                 'end_date': DateInput(attrs={'class':'datepicker'})
                 }
+class ScheduleForm(ModelForm):
+    class Meta:
+        model = Schedule
+        fields = ['visibility','name']
+        

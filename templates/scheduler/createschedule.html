@@ -1,0 +1,16 @@
+{% extends "scheduler/base.html" %}
+{% block head %}
+<script>
+    $(function() {
+        $(".datepicker").datepicker();
+    });
+</script>
+{% endblock %}
+{% block body %}
+<h2>Creating a New Schedule</h2>
+<form action="/accounts/createschedule/{{ schedule }}" method="POST" accept-charset="utf-8">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value = "Add"></p>
+</form>
+{% endblock %}
