@@ -4,7 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
-from scheduler.forms import EventForm
+from scheduler.forms import EventForm, ScheduleForm
+from django.contrib.auth.models import User
 from scheduler.models import *
 
 def home_view(request):
@@ -52,3 +53,18 @@ def create_event_view(request,scheduleid):
             return render(request, "scheduler/createevent.html",{'form':form,'schedule':schedule})
     else:
         return render(request, "scheduler/createevent.html",{'form':form,'schedule':schedule})
+
+@login_required
+def create_schedule_view(request):
+    form = ScheduleForm(data=request.POST) #Load form
+    if request.method == 'POST':
+        if form.is_valid():
+            schedule = form.save(commit = False) #get schedule with form data, doesnt commit
+            schedule.creator = request.user #add creator id
+            schedule.save() #commit to db
+            return redirect("/accounts/profile") #TODO: Make this redirect somewhere useful
+        else:
+            return render(request, "scheduler/createschedule.html",{'form':form})
+    else:
+        return render(request, "scheduler/createschedule.html",{'form':form})
+    return render(request, "scheduler/createschedule.html")
