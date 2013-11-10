@@ -1,0 +1,7 @@
+{% extends "scheduler/base.html" %}
+
+{% block body %}
+<p>{{ schedule }}</p>
+<p><a href="/createevent/{{ schedule.id }}">Create event on this schedule</a></p>
+
+{% endblock %}
