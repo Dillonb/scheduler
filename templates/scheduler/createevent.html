@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<form action="/createevent" method="POST">
+<form action="/createevent/{{ scheduleid }}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit">Submit</input>
