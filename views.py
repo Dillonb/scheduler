@@ -10,24 +10,6 @@ from scheduler.models import *
 def home_view(request):
     return render(request,"scheduler/base.html")
 
-#TODO: Support @login_required's ?next feature... 
-def login_view(request):
-    form = AuthenticationForm(data=request.POST)
-    if form.is_valid():
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user = authenticate(username=username, password=password) 
-        if user:
-            if user.is_active:
-                login(request,user)
-            else:
-                return HttpResponse("User not active.")
-        else:
-            return HttpResponse("User invalid.")
-        return HttpResponseRedirect("/account")
-    else:
-        return render(request,"scheduler/login.html", {"form":form})
-
 def logout_view(request):
     logout(request)
     return render(request, "scheduler/loggedout.html")
