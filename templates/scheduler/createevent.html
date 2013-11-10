@@ -1,5 +1,11 @@
 {% extends "scheduler/base.html" %}
-
+{% block head %}
+<script>
+    $(function() {
+        $(".datepicker").datepicker();
+    });
+</script>
+{% endblock %}
 {% block body %}
 <h2>Creating event on {{ schedule }}</h2>
 <form action="/createevent/{{ schedule.id }}" method="POST">
