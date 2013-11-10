@@ -1,8 +1,8 @@
 {% extends "scheduler/base.html" %}
 
 {% block body %}
-
-<form action="/createevent/{{ scheduleid }}" method="POST">
+<h2>Creating event on {{ schedule }}</h2>
+<form action="/createevent/{{ schedule.id }}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit">Submit</input>
