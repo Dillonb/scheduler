@@ -57,6 +57,10 @@ def account_view(request):
 def create_event_view(request):
     form = EventForm(data=request.POST)
     if request.method == 'POST':
-        pass
+        if form.is_valid():
+            event = form.save(commit = False) # Get an event with the form data (don't commit to db yet)
+            #TODO: Make this link to a parent schedule somehow
+        else:
+            return render(request, "scheduler/createevent.html",{'form':form})
     else:
         return render(request, "scheduler/createevent.html",{'form':form})
