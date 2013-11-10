@@ -8,6 +8,7 @@ urlpatterns = patterns('',
         url(r'^accounts/register/$','scheduler.views.register_view'),
         url(r'^accounts/profile/$','scheduler.views.account_view'),
         url(r'^createevent/(?P<scheduleid>\d)$','scheduler.views.create_event_view'),
+        url(r'^schedule/(?P<scheduleid>\d)$','scheduler.views.schedule_view'),
         url(r'^accounts/createschedule/$','scheduler.views.create_schedule_view'),
                        
         )
