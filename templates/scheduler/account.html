@@ -4,7 +4,7 @@
 Account page...
 <ul>
     {% for schedule in schedules %}
-    <li>{{ schedule }}</li>
+    <li><a href="/createevent/{{ schedule.id }}">{{ schedule }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
