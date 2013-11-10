@@ -2,8 +2,9 @@
 
 {% block body %}
 
-<form action="/createevent">
+<form action="/createevent" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
+    <input type="submit">Submit</input>
 </form>
 {% endblock %}
