@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from scheduler.forms import EventForm
+from scheduler.models import *
 
 def home_view(request):
     return render(request,"scheduler/base.html")
@@ -51,7 +52,8 @@ def register_view(request):
 
 @login_required
 def account_view(request):
-    return render(request, "scheduler/account.html")
+    schedules = Schedule.objects.filter(creator=request.user)
+    return render(request, "scheduler/account.html",{'schedules':schedules})
     
 @login_required
 def create_event_view(request):

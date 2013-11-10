@@ -2,4 +2,9 @@
 {% block title %}Account{% endblock %}
 {% block body %}
 Account page...
+<ul>
+    {% for schedule in schedules %}
+    <li>{{ schedule }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}
