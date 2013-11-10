@@ -49,6 +49,6 @@ def create_event_view(request,scheduleid):
             event.save() # NOW we can save to the database.
             return redirect("/accounts/profile") #TODO: make this redirect somewhere good
         else:
-            return render(request, "scheduler/createevent.html",{'form':form,'scheduleid':scheduleid})
+            return render(request, "scheduler/createevent.html",{'form':form,'schedule':schedule})
     else:
-        return render(request, "scheduler/createevent.html",{'form':form,'scheduleid':scheduleid})
+        return render(request, "scheduler/createevent.html",{'form':form,'schedule':schedule})
