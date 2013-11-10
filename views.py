@@ -53,6 +53,7 @@ def register_view(request):
 def account_view(request):
     return render(request, "scheduler/account.html")
     
+@login_required
 def create_event_view(request):
     form = EventForm(data=request.POST)
     if request.method == 'POST':
