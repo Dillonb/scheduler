@@ -18,7 +18,7 @@ class Schedule(models.Model):
     name = models.CharField(max_length=150)
 
     def __str__(self):
-        return "%s %s"%(self.creator, self.visibility)
+        return "%s %s: %s"%(self.creator, self.visibility, self.name)
 
 class Event(models.Model):
     VISIBILITY_INHERIT = -1
