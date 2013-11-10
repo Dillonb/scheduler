@@ -11,6 +11,6 @@
 <form action="/createevent/{{ schedule.id }}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit">Submit</input>
+    <input type="submit">
 </form>
 {% endblock %}
