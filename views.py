@@ -62,7 +62,7 @@ def create_schedule_view(request):
             schedule = form.save(commit = False) #get schedule with form data, doesnt commit
             schedule.creator = request.user #add creator id
             schedule.save() #commit to db
-            return redirect("schedule/"+str(schedule.id)) # Redirect to the view page for that schedule
+            return redirect("/schedule/"+str(schedule.id)) # Redirect to the view page for that schedule
         else:
             return render(request, "scheduler/createschedule.html",{'form':form})
     else:
