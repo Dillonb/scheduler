@@ -91,3 +91,7 @@ def schedule_view(request, scheduleid):
         return render(request, "scheduler/schedule.html",{'schedule':schedule})
     else:
         return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
+
+@login_required
+def friends_view(request):
+    return render(request,"scheduler/friends.html")
