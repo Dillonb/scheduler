@@ -40,8 +40,9 @@ def account_view(request):
     
 @login_required
 def create_event_view(request,scheduleid):
-    #TODO: Add a check to make sure that the user owns this schedule
     schedule = get_object_or_404(Schedule, id=scheduleid) # The parent schedule
+    if schedule.creator != request.user:
+        return render(request, "scheduler/errorpage.html", {'message':"PERMISSION DENIED"})
     form = EventForm(data=request.POST) # Load the form
     if request.method == 'POST':
         if form.is_valid():
