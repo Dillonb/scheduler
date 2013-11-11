@@ -50,7 +50,7 @@ def create_event_view(request,scheduleid):
             event = form.save(commit = False) # Get an event with the form data (don't commit to db yet)
             event.schedule = schedule # Set the parent schedule
             event.save() # NOW we can save to the database.
-            return redirect("/accounts/profile") #TODO: make this redirect somewhere good
+            return redirect("/schedule/"+str(event.schedule.id)) 
         else:
             return render(request, "scheduler/createevent.html",{'form':form,'schedule':schedule})
     else:
