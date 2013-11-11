@@ -57,7 +57,7 @@ class Event(models.Model):
     description = models.TextField() # Description of event
 
     def __str__(self):
-        return "%s's event"%(self.schedule.creator.username)
+        return "%s's event, (%s): %s-%s"%(self.schedule.creator.username, self.name, self.start_time, self.end_time)
 
 admin.site.register(Schedule)
 admin.site.register(Event)
