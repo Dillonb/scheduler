@@ -3,5 +3,9 @@
 {% block body %}
 <p>{{ schedule }}</p>
 <p><a href="/createevent/{{ schedule.id }}">Create event on this schedule</a></p>
-
+<p>
+{% for event in schedule.event_set.all %}
+</p>
+{{ event }}
+{% endfor %}
 {% endblock %}
