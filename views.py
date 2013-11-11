@@ -41,6 +41,7 @@ def account_view(request):
 @login_required
 def create_event_view(request,scheduleid):
     schedule = get_object_or_404(Schedule, id=scheduleid) # The parent schedule
+    # If the current user does not own the schedule, do not allow them to create an event on it.
     if schedule.creator != request.user:
         return render(request, "scheduler/errorpage.html", {'message':"PERMISSION DENIED"})
     form = EventForm(data=request.POST) # Load the form
@@ -73,4 +74,21 @@ def create_schedule_view(request):
 def schedule_view(request, scheduleid):
     #TODO: Check permissions of user to make sure they can access the schedule (ANONYMOUS USERS INCLUDED)
     schedule = get_object_or_404(Schedule, id=scheduleid)
-    return render(request, "scheduler/schedule.html",{'schedule':schedule})
+    canView = False
+
+    # Schedule is public, allow anyone to view it
+    if schedule.visibility == schedule.VISIBILITY_PUBLIC:
+        canView = True
+    # TODO: Fill this in after implementing friends.
+    elif schedule.visibility == schedule.VISIBILITY_FRIENDSONLY:
+        pass 
+    # If the schedule is private, only allow the owner to view it.
+    elif schedule.visibility == schedule.VISIBILITY_PRIVATE:
+        if schedule.creator == request.user: # If the current user is the owner
+            canView = True
+        else:
+            canView = False
+    if canView:
+        return render(request, "scheduler/schedule.html",{'schedule':schedule})
+    else:
+        return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
