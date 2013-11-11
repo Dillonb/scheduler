@@ -72,7 +72,6 @@ def create_schedule_view(request):
     return render(request, "scheduler/createschedule.html")
 
 def schedule_view(request, scheduleid):
-    #TODO: Check permissions of user to make sure they can access the schedule (ANONYMOUS USERS INCLUDED)
     schedule = get_object_or_404(Schedule, id=scheduleid)
     canView = False
 
