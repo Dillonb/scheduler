@@ -1,6 +1,6 @@
 
 from django.contrib.auth import logout, authenticate, login
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -108,3 +108,20 @@ def friends_view(request):
             accepted_friends.append(friend)
 
     return render(request,"scheduler/friends.html", {'friends': accepted_friends,'sent_requests':sent_requests, 'pending_requests':pending_requests})
+
+def friends_accept_view(request, friendid):
+    friend = get_object_or_404(Friend, id=friendid)
+    if friend.status != Friend.STATUS_SENT:
+        raise Http404
+    if friend.friend == request.user:
+        friend.status = Friend.STATUS_ACCEPTED
+        friend.save()
+    else:
+        return render("scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
+    return redirect("/friends")
+
+def friends_decline_view(request, friendid):
+    pass
+
+def friends_add_view(request):
+    pass

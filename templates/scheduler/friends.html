@@ -22,8 +22,9 @@
         <li>{{ friend.creator }} + {{ friend.friend }} : {{ friend.status }}</li>
     {% endfor %}
     </ul>
+    <p><a href="/friends/add">Add a friend</a></p>
 {% else %}
-<h3>You haven't added anyone yet! Would you like to <a href="/friends/add">Add a friend?</a></h3>
+    <h3>You haven't added anyone yet! Would you like to <a href="/friends/add">Add a friend?</a></h3>
 {% endif %}
 
 {% if sent_requests %}

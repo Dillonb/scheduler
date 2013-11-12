@@ -11,5 +11,6 @@ urlpatterns = patterns('',
         url(r'^schedule/(?P<scheduleid>\d+)$','scheduler.views.schedule_view'),
         url(r'^accounts/createschedule/$','scheduler.views.create_schedule_view'),
         url(r'^friends/$','scheduler.views.friends_view'),
+        url(r'^friends/accept/(?P<friendid>\d+)$','scheduler.views.friends_accept_view'),
                        
         )
