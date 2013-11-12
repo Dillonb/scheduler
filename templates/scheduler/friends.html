@@ -5,7 +5,12 @@
 {% if pending_requests %}
     <ul>
     {% for request in pending_requests %}
-        <li>Friend request from {{ request.creator }}</li>
+    
+    <li>Friend request from {{ request.creator }}
+    <a href="/friends/accept/{{ request.id }}">Accept</a>
+    <a href="/friends/decline/{{ request.id }}">Decline</a>
+    </li>
+
     {% endfor %}
     </ul>
 {% endif %}
@@ -18,14 +23,14 @@
     {% endfor %}
     </ul>
 {% else %}
-    <h3>You haven't added anyone yet!</h3>
+<h3>You haven't added anyone yet! Would you like to <a href="/friends/add">Add a friend?</a></h3>
 {% endif %}
 
 {% if sent_requests %}
     <h3>Sent requests</h3>
     <ul>
         {% for request in sent_requests %}
-        <li>Sent request to {{ request.friend }}</li>
+        <li>Pending request sent to {{ request.friend }}</li>
         {% endfor %}
     </ul>
 {% endif %}
