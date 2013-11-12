@@ -1,4 +1,27 @@
 {% extends "scheduler/base.html" %}
 {% block body %}
-Placeholder
+
+
+{% if pending_requests %}
+    {% for request in pending_requests %}
+        <p>Friend request from {{ request.creator }}</p>
+    {% endfor %}
+{% endif %}
+
+{% if friends %}
+    <h2>Friends</h2>
+    {% for friend in friends %}
+        <p>{{ friend.creator }} + {{ friend.friend }} : {{ friend.status }}</p>
+    {% endfor %}
+{% else %}
+    <h2>You haven't added anyone yet!</h2>
+{% endif %}
+
+{% if sent_requests %}
+    <h2>Sent requests</h2>
+    {% for request in sent_requests %}
+        <p>Sent request to {{ request.friend }}</p>
+    {% endfor %}
+{% endif %}
+
 {% endblock %}

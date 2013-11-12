@@ -94,4 +94,17 @@ def schedule_view(request, scheduleid):
 
 @login_required
 def friends_view(request):
-    return render(request,"scheduler/friends.html")
+    friends = Friend.objects.all_friends_for_user(request.user)
+    pending_requests = []
+    sent_requests = []
+    accepted_friends = []
+    for friend in friends:
+        if friend.status == Friend.STATUS_SENT:
+            if friend.creator == request.user:
+                sent_requests.append(friend)
+            else:
+                pending_requests.append(friend)
+        elif friend.status == Friend.STATUS_ACCEPTED or friend.status == Friend.STATUS_MATCHED:
+            accepted_friends.append(friend)
+
+    return render(request,"scheduler/friends.html", {'friends': accepted_friends,'sent_requests':sent_requests, 'pending_requests':pending_requests})
