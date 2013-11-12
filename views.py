@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
-from scheduler.forms import EventForm, ScheduleForm
+from scheduler.forms import EventForm, ScheduleForm, AddFriendForm
 from django.contrib.auth.models import User
 from scheduler.models import *
 
@@ -117,11 +117,42 @@ def friends_accept_view(request, friendid):
         friend.status = Friend.STATUS_ACCEPTED
         friend.save()
     else:
-        return render("scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
+        return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
     return redirect("/friends")
 
 def friends_decline_view(request, friendid):
     pass
 
 def friends_add_view(request):
-    pass
+    if request.method == "POST":
+        form = AddFriendForm(request.POST)
+        if form.is_valid():
+            # Get the friend relationship if it already exists
+            friend = Friend.objects.get_friend_object(request.user, form.get_newfriend_user())
+            # If the relationship did not previously exist, create it as a request with the current user as the creator.
+            if friend == None:
+                if form.get_newfriend_user() == request.user:
+                    return render(request,"scheduler/errorpage.html",{'message':"You can't send a friend request to yourself."})
+                friend = Friend(creator=request.user, friend=form.get_newfriend_user())
+                friend.save()
+                return redirect("/friends/")
+            else: # If the relationship already exists...
+                # See if it was already accepted/matched and tell them they are already friends
+                if friend.status == Friend.STATUS_ACCEPTED or friend.status == Friend.STATUS_MATCHED:
+                    return render(request, "scheduler/errorpage.html",{'message':"You are already friends with this user"})
+                # It was a sent friend request
+                elif friend.status == Friend.STATUS_SENT:
+                    # If it was sent by the current user, tell them they can't send another.
+                    if friend.creator == request.user:
+                        return render(request,"scheduler/errorpage.html",{'message':"You already sent a friend request to this user."})
+                    # Otherwise, match the two up and update the original friend request.
+                    else:
+                        # The other user sent this friend request. Update it to STATUS_MATCHED.
+                        print "MATCHING FRIEND REQUEST"
+                        friend.status = Friend.STATUS_MATCHED
+                        friend.save()
+                        return redirect("/friends/")
+    else:
+        form = AddFriendForm()
+
+    return render(request, "scheduler/addfriend.html", {"form":form})
