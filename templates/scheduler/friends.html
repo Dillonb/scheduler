@@ -3,25 +3,31 @@
 
 
 {% if pending_requests %}
+    <ul>
     {% for request in pending_requests %}
-        <p>Friend request from {{ request.creator }}</p>
+        <li>Friend request from {{ request.creator }}</li>
     {% endfor %}
+    </ul>
 {% endif %}
 
 {% if friends %}
-    <h2>Friends</h2>
+    <h3>Friends</h3>
+    <ul>
     {% for friend in friends %}
-        <p>{{ friend.creator }} + {{ friend.friend }} : {{ friend.status }}</p>
+        <li>{{ friend.creator }} + {{ friend.friend }} : {{ friend.status }}</li>
     {% endfor %}
+    </ul>
 {% else %}
-    <h2>You haven't added anyone yet!</h2>
+    <h3>You haven't added anyone yet!</h3>
 {% endif %}
 
 {% if sent_requests %}
-    <h2>Sent requests</h2>
-    {% for request in sent_requests %}
-        <p>Sent request to {{ request.friend }}</p>
-    {% endfor %}
+    <h3>Sent requests</h3>
+    <ul>
+        {% for request in sent_requests %}
+        <li>Sent request to {{ request.friend }}</li>
+        {% endfor %}
+    </ul>
 {% endif %}
 
 {% endblock %}
