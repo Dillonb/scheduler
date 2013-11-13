@@ -148,7 +148,6 @@ def friends_add_view(request):
                     # Otherwise, match the two up and update the original friend request.
                     else:
                         # The other user sent this friend request. Update it to STATUS_MATCHED.
-                        print "MATCHING FRIEND REQUEST"
                         friend.status = Friend.STATUS_MATCHED
                         friend.save()
                         return redirect("/friends/")
