@@ -63,8 +63,11 @@ def create_schedule_view(request):
         if form.is_valid():
             schedule = form.save(commit = False) #get schedule with form data, doesnt commit
             schedule.creator = request.user #add creator id
-            schedule.save() #commit to db
-            return redirect("/schedule/"+str(schedule.id)) # Redirect to the view page for that schedule
+            if not(Schedule.objects.filter(name=schedule.name).exists()): #if a schedule with the same name doesn't already exist
+                schedule.save() #commit to db
+                return redirect("/schedule/"+str(schedule.id)) # Redirect to the view page for that schedule
+            else: #if a schedule with the same name exists:
+                return render(request,"scheduler/errorpage.html",{'message':"A schedule with the same name alredy exists."})
         else:
             return render(request, "scheduler/createschedule.html",{'form':form})
     else:
@@ -80,10 +83,12 @@ def schedule_view(request, scheduleid):
     # TODO: Fill this in after implementing friends.
     elif schedule.visibility == schedule.VISIBILITY_FRIENDSONLY:
         #set canView true if the request user and schedule creator are friends:
-        canView = Friend.objects.are_friends(request.user, schedule.creator)
-        #if the request user is the creator set canView true:
         if schedule.creator == request.user:
             canView = True
+        else:
+            canView = Friend.objects.are_friends(request.user, schedule.creator)
+        #if the request user is the creator set canView true:
+
     # If the schedule is private, only allow the owner to view it.
     elif schedule.visibility == schedule.VISIBILITY_PRIVATE:
         if schedule.creator == request.user: # If the current user is the owner
@@ -169,3 +174,36 @@ def friends_add_view(request):
         form = AddFriendForm()
 
     return render(request, "scheduler/addfriend.html", {"form":form})
+
+
+#TODO: remove login required and allow anonymous users to view public schedules
+@login_required
+def account_page_view(request, userid):
+    #Get all the schedules from the user indicated:
+    schedules = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_PUBLIC)
+    #get the friend object of that user
+    friend = get_object_or_404(Friend, id=userid)
+    #if the request user is the owner of the profile then they can view friends only schedules and private schedules
+    if request.user == get_object_or_404(User, id=userid):
+        #gets private schedules:
+        private = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_PRIVATE)
+        #gets friends only schedules:
+        friendsOnly = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_FRIENDSONLY)
+        #returns public, freinds only and private schedules:
+        return render(request, "scheduler/user.html",{'schedules':schedules, 'friendsOnly':friendsOnly, 'private':private})
+        #allows friend only schedule viewing:
+    else:
+        #if the request user isnt the owner of the profile see if they are friends.
+        canView = Friend.objects.are_friends(request.user, friend)
+    if canView:
+        #get friends only schedules:
+        friendsOnly = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_FRIENDSONLY)
+        #returns public and friendsonly schedules:
+        return render(request, "scheduler/user.html",{'schedules':schedules, 'friendsOnly':friendsOnly})
+    else:
+        #returns only public schedules:
+        return render(request, "scheduler/user.html",{'schedules':schedules})
+    
+
+
+
