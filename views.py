@@ -123,7 +123,15 @@ def friends_accept_view(request, friendid):
 
 @login_required
 def friends_decline_view(request, friendid):
-    pass
+    friend = get_object_or_404(Friend, id=friendid)
+    if friend.status != Friend.STATUS_SENT:
+        raise Http404
+    if friend.friend == request.user:
+        friend.delete()
+    else:
+        return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
+    return redirect("/friends")
+
 
 @login_required
 def friends_add_view(request):

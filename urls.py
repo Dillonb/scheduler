@@ -13,5 +13,6 @@ urlpatterns = patterns('',
         url(r'^friends/$','scheduler.views.friends_view'),
         url(r'^friends/accept/(?P<friendid>\d+)$','scheduler.views.friends_accept_view'),
         url(r'^friends/add/$','scheduler.views.friends_add_view'),
+        url(r'^friends/decline/(?P<friendid>\d+)$','scheduler.views.friends_decline_view'),
                        
         )
