@@ -3,5 +3,7 @@
 <form action="/friends/add/" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
+	<input type="submit" value="Send Friend Request">
+
 </form>
 {% endblock %}
