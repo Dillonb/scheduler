@@ -74,13 +74,16 @@ def create_schedule_view(request):
 def schedule_view(request, scheduleid):
     schedule = get_object_or_404(Schedule, id=scheduleid)
     canView = False
-
     # Schedule is public, allow anyone to view it
     if schedule.visibility == schedule.VISIBILITY_PUBLIC:
         canView = True
     # TODO: Fill this in after implementing friends.
     elif schedule.visibility == schedule.VISIBILITY_FRIENDSONLY:
-        pass 
+        #set canView true if the request user and schedule creator are friends:
+        canView = Friend.objects.are_friends(request.user, schedule.creator)
+        #if the request user is the creator set canView true:
+        if schedule.creator == request.user:
+            canView = True
     # If the schedule is private, only allow the owner to view it.
     elif schedule.visibility == schedule.VISIBILITY_PRIVATE:
         if schedule.creator == request.user: # If the current user is the owner
