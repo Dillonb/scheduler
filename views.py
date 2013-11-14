@@ -178,22 +178,22 @@ def friends_add_view(request):
 
 def account_page_view(request, userid):
     #Get all the schedules from the user indicated:
-    schedules = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_PUBLIC)
+    user = get_object_or_404(User, id=userid)
+    schedules = Schedule.objects.filter(creator=user, visibility=Schedule.VISIBILITY_PUBLIC)
     #get the friend object of that user
     if request.user.is_authenticated():
-        friend = get_object_or_404(Friend, id=userid)
         #if the request user is the owner of the profile then they can view friends only schedules and private schedules
-        if request.user == get_object_or_404(User, id=userid):
+        if request.user == user:
             #gets private schedules:
             private = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_PRIVATE)
             #gets friends only schedules:
             friendsOnly = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_FRIENDSONLY)
-            #returns public, freinds only and private schedules:
+            #returns public, friends only and private schedules:
             return render(request, "scheduler/user.html",{'schedules':schedules, 'friendsOnly':friendsOnly, 'private':private})
             #allows friend only schedule viewing:
         else:
             #if the request user isnt the owner of the profile see if they are friends.
-            if Friend.objects.are_friends(request.user, friend):
+            if Friend.objects.are_friends(request.user, user):
                 #get friends only schedules:
                 friendsOnly = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_FRIENDSONLY)
                 #returns public and friendsonly schedules:
