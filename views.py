@@ -80,7 +80,6 @@ def schedule_view(request, scheduleid):
     # Schedule is public, allow anyone to view it
     if schedule.visibility == schedule.VISIBILITY_PUBLIC:
         canView = True
-    # TODO: Fill this in after implementing friends.
     elif schedule.visibility == schedule.VISIBILITY_FRIENDSONLY:
         #set canView true if the request user and schedule creator are friends:
         if schedule.creator == request.user:
