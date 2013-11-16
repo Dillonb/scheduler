@@ -20,6 +20,14 @@ class Schedule(models.Model):
     def __str__(self):
         return "%s %s: %s"%(self.creator, self.visibility, self.name)
 
+class EventManager(models.Manager):
+    def on_date(self, date, schedule=None):
+        weekdayname = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"][date.weekday()]
+        if schedule == None:
+            return self.filter(**{'start_date__lte':date, 'end_date__gte':date, weekdayname:True})
+        else:
+            return self.filter(**{'schedule':schedule, 'start_date__lte':date, 'end_date__gte':date, weekdayname:True})
+
 class Event(models.Model):
     VISIBILITY_INHERIT = -1
     VISIBILITY_PUBLIC = 0
@@ -56,8 +64,13 @@ class Event(models.Model):
     location = models.CharField(max_length=250) # The location of the event. Address?
     description = models.TextField() # Description of event
 
+    objects = EventManager()
+
     def __str__(self):
         return "%s's event, (%s): %s-%s"%(self.schedule.creator.username, self.name, self.start_time, self.end_time)
+    
+    def weekdays(self):
+        return [self.sunday, self.monday, self.tuesday, self.wednesday, self.thursday, self.friday, self.saturday]
 
 class FriendManager(models.Manager):
     def are_friends(self, user, other):

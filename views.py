@@ -1,4 +1,4 @@
-
+import datetime
 from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
@@ -74,7 +74,7 @@ def create_schedule_view(request):
         return render(request, "scheduler/createschedule.html",{'form':form})
     return render(request, "scheduler/createschedule.html")
 
-def schedule_view(request, scheduleid):
+def schedule_view(request, scheduleid, view=0, week=datetime.datetime.now()):
     schedule = get_object_or_404(Schedule, id=scheduleid)
     canView = False
     # Schedule is public, allow anyone to view it
@@ -95,7 +95,28 @@ def schedule_view(request, scheduleid):
         else:
             canView = False
     if canView:
-        return render(request, "scheduler/schedule.html",{'schedule':schedule})
+
+        weekday = week.weekday()
+        # If sunday, monday is the day after (not 6 days before)
+        if weekday == 6:
+            monday = week + datetime.timedelta(days=1)
+        else:
+            monday = week - datetime.timedelta(days=week.weekday())
+
+        week = [monday - datetime.timedelta(days=1), # Sunday
+                monday,                              # Monday
+                monday + datetime.timedelta(days=1), # Tuesday
+                monday + datetime.timedelta(days=2), # Wednesday
+                monday + datetime.timedelta(days=3), # Thursday
+                monday + datetime.timedelta(days=4), # Friday
+                monday + datetime.timedelta(days=5), # Saturday
+                ]
+        events = []
+
+        for day in week:
+            events.append((day, Event.objects.on_date(day, schedule)))
+
+        return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events})
     else:
         return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
 

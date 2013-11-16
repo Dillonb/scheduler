@@ -4,8 +4,16 @@
 <p>{{ schedule }}</p>
 <p><a href="/createevent/{{ schedule.id }}">Create event on this schedule</a></p>
 <p>
-{% for event in schedule.event_set.all %}
-</p>
-{{ event }}
-{% endfor %}
+<ul>
+    {% for day, dayevents in events %}
+        <li> {{ day }} </li>
+        <li>
+            <ul>
+                {% for event in dayevents %}
+                    <li> {{ event }} </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
 {% endblock %}
