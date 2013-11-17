@@ -21,12 +21,11 @@ class Schedule(models.Model):
         return "%s %s: %s"%(self.creator, self.visibility, self.name)
 
 class EventManager(models.Manager):
-    def on_date(self, date, schedule=None):
+    # Gets all events happening on a certain date.
+    def on_date(self, date, schedule):
+        # Gets the name of of the day (for use in the django query dict)
         weekdayname = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"][date.weekday()]
-        if schedule == None:
-            return self.filter(**{'start_date__lte':date, 'end_date__gte':date, weekdayname:True})
-        else:
-            return self.filter(**{'schedule':schedule, 'start_date__lte':date, 'end_date__gte':date, weekdayname:True})
+        return self.filter(**{'schedule':schedule, 'start_date__lte':date, 'end_date__gte':date, weekdayname:True})
 
 class Event(models.Model):
     VISIBILITY_INHERIT = -1
