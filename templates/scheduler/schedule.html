@@ -1,16 +1,48 @@
 {% extends "scheduler/base.html" %}
 
+{% block head %}
+<style type="text/css">
+.week {
+    list-style-type:none;
+}
+.daycontainer {
+
+    width:200px;
+    height:1220px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color:darkgray;
+    float:left;
+}
+.day {
+    list-style-type:none;
+    margin-left: -40px;
+}
+.header {
+    top:0px;
+    height:20px;
+}
+.event {
+    background-color:black;
+    color:white;
+}
+body .body {
+    width: 1600px;
+}
+</style>
+{% endblock %}
+
 {% block body %}
 <p>{{ schedule }}</p>
 <p><a href="/createevent/{{ schedule.id }}">Create event on this schedule</a></p>
 <p>
-<ul>
+<ul class="week">
     {% for day, dayevents in events %}
-        <li> {{ day.date }} </li>
-        <li>
-            <ul>
+        <li class="daycontainer">
+            <ul class="day">
+                <li class="header"> {{ day.date }} </li>
                 {% for event in dayevents %}
-                    <li> {{ event }} </li>
+                    <li class="event"> {{ event }} </li>
                 {% endfor %}
             </ul>
         </li>
