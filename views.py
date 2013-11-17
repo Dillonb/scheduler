@@ -101,8 +101,10 @@ def schedule_view(request, scheduleid, view=0, week=datetime.datetime.now()):
         if weekday == 6:
             monday = week + datetime.timedelta(days=1)
         else:
+            # Subtract the day of the week from the current day to get monday.
             monday = week - datetime.timedelta(days=week.weekday())
 
+        # Create an array of datetime objects holding every day of the (current) week
         week = [monday - datetime.timedelta(days=1), # Sunday
                 monday,                              # Monday
                 monday + datetime.timedelta(days=1), # Tuesday
@@ -113,6 +115,7 @@ def schedule_view(request, scheduleid, view=0, week=datetime.datetime.now()):
                 ]
         events = []
 
+        # Fill the events array with tuples containing a datetime object and all the events happening on that day
         for day in week:
             events.append((day, Event.objects.on_date(day, schedule)))
 
