@@ -13,7 +13,7 @@
     margin-right: 4px;
     float:left;
     background-image: url("http://199.195.251.194/~dillon/tiledaybg.png");
-    background-attachment:fixed;
+    background-attachment:scroll;
     background-position: 0px 20px;
     border-style: none solid none solid;
     border-width:1px;
@@ -31,6 +31,8 @@
 .event {
     background-color:rgba(0,0,0,0.75);
     color:white;
+    position:absolute;
+    width:199px;
 }
 body .body {
     width: 1600px;
@@ -48,7 +50,9 @@ body .body {
             <ul class="day">
                 <li class="header"> {{ day.date }} </li>
                 {% for event in dayevents %}
-                    <li class="event"> {{ event }} </li>
+                <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
+                    {{ event }}
+                </li>
                 {% endfor %}
             </ul>
         </li>
