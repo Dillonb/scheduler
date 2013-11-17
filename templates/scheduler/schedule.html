@@ -18,6 +18,16 @@
     border-style: none solid none solid;
     border-width:1px;
 }
+li.timelegend {
+    width: 50px;
+    height: 1220px;
+    float:left;
+}
+ul.timelegend {
+    list-style-type:none;
+    width:50px;
+    margin-left: -40px;
+}
 .day {
     list-style-type:none;
     margin-left: -40px;
@@ -25,14 +35,27 @@
 .header {
     top:0px;
     height:20px;
-    background-color:black;
+    background-color:rgb(51,51,51);
     color:white;
+}
+ul.timelegend .header {
+    width:50px;
+    background-color:white;
+    border-bottom-style:solid;
+    border-bottom-color:black;
+    border-bottom-width:2px;
 }
 .event {
     background-color:rgba(0,0,0,0.75);
     color:white;
     position:absolute;
     width:199px;
+}
+li.timeblock {
+    height: 50px;
+    width: 50px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
 }
 body .body {
     width: 1600px;
@@ -50,6 +73,35 @@ body .body {
 </p>
 <p>
 <ul class="week">
+    <li class="timelegend">
+        <ul class="timelegend">
+            <li class="header">asdf</li>
+            <li class="timeblock">0:00</li>
+            <li class="timeblock">1:00</li>
+            <li class="timeblock">2:00</li>
+            <li class="timeblock">3:00</li>
+            <li class="timeblock">4:00</li>
+            <li class="timeblock">5:00</li>
+            <li class="timeblock">6:00</li>
+            <li class="timeblock">7:00</li>
+            <li class="timeblock">8:00</li>
+            <li class="timeblock">9:00</li>
+            <li class="timeblock">10:00</li>
+            <li class="timeblock">11:00</li>
+            <li class="timeblock">12:00</li>
+            <li class="timeblock">13:00</li>
+            <li class="timeblock">14:00</li>
+            <li class="timeblock">15:00</li>
+            <li class="timeblock">16:00</li>
+            <li class="timeblock">17:00</li>
+            <li class="timeblock">18:00</li>
+            <li class="timeblock">19:00</li>
+            <li class="timeblock">20:00</li>
+            <li class="timeblock">21:00</li>
+            <li class="timeblock">22:00</li>
+            <li class="timeblock">23:00</li>
+        </ul>
+    </li>
     {% for day, dayevents in events %}
         <li class="daycontainer">
             <ul class="day">
