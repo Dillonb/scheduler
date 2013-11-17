@@ -6,7 +6,7 @@
 <p>
 <ul>
     {% for day, dayevents in events %}
-        <li> {{ day }} </li>
+        <li> {{ day.date }} </li>
         <li>
             <ul>
                 {% for event in dayevents %}
