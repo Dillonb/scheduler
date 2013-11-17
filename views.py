@@ -1,4 +1,5 @@
 import datetime
+import time
 from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
@@ -74,7 +75,10 @@ def create_schedule_view(request):
         return render(request, "scheduler/createschedule.html",{'form':form})
     return render(request, "scheduler/createschedule.html")
 
-def schedule_view(request, scheduleid, view=0, week=datetime.datetime.now()):
+def schedule_view(request, scheduleid, view=0, starttime=None):
+    if starttime == None:
+        starttime = int(time.time())
+    week = datetime.datetime.fromtimestamp(float(starttime))
     schedule = get_object_or_404(Schedule, id=scheduleid)
     canView = False
     # Schedule is public, allow anyone to view it
@@ -119,7 +123,7 @@ def schedule_view(request, scheduleid, view=0, week=datetime.datetime.now()):
         for day in week:
             events.append((day, Event.objects.on_date(day, schedule)))
 
-        return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events})
+        return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime})
     else:
         return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
 

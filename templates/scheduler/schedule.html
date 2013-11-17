@@ -44,6 +44,11 @@ body .body {
 <p>{{ schedule }}</p>
 <p><a href="/createevent/{{ schedule.id }}">Create event on this schedule</a></p>
 <p>
+    <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
+    | <a href="/schedule/{{ schedule.id }}/">This Week</a>
+    | <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"604800" }}">Next Week</a>
+</p>
+<p>
 <ul class="week">
     {% for day, dayevents in events %}
         <li class="daycontainer">
