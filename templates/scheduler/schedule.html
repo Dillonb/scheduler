@@ -78,6 +78,7 @@ body .body {
 
 {% block body %}
 <p>{{ schedule }}</p>
+<p>Click on an event to edit it.</p>
 <p>
     <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
     | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
