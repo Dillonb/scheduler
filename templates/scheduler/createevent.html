@@ -7,8 +7,13 @@
 </script>
 {% endblock %}
 {% block body %}
+{% if edit %}
+<h2>Editing event {{ event }} on {{ event.schedule }}</h2>
+<form action="/editevent/{{ event.id }}" method="POST">
+{% else %}
 <h2>Creating event on {{ schedule }}</h2>
 <form action="/createevent/{{ schedule.id }}" method="POST">
+{% endif %}
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit">

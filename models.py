@@ -21,6 +21,19 @@ class Schedule(models.Model):
     def __str__(self):
         return "%s %s: %s"%(self.creator, self.visibility, self.name)
 
+    def clean(self):
+        # Make sure that the name is unique for this user (Other users can have schedules with the same name)
+        try:
+            newschedule = Schedule.objects.get(name=self.name,creator=self.creator)
+            # If the id numbers are the same...
+            if newschedule.id == self.id:
+                pass # No problem. The user just didn't change the name.
+            else:
+                raise ValidationError("A schedule with that name already exists.")
+
+        except Schedule.DoesNotExist:
+            pass # Schedule object doesn't exist with that name and creator, so it's okay to rename this schedule.
+
 class EventManager(models.Manager):
     # Gets all events happening on a certain date.
     def on_date(self, date, schedule):

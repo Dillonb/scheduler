@@ -64,16 +64,46 @@ def create_schedule_view(request):
         if form.is_valid():
             schedule = form.save(commit = False) #get schedule with form data, doesnt commit
             schedule.creator = request.user #add creator id
-            if not(Schedule.objects.filter(name=schedule.name).exists()): #if a schedule with the same name doesn't already exist
-                schedule.save() #commit to db
-                return redirect("/schedule/"+str(schedule.id)) # Redirect to the view page for that schedule
-            else: #if a schedule with the same name exists:
-                return render(request,"scheduler/errorpage.html",{'message':"A schedule with the same name alredy exists."})
+            schedule.save() #commit to db
+            return redirect("/schedule/"+str(schedule.id)) # Redirect to the view page for that schedule
         else:
             return render(request, "scheduler/createschedule.html",{'form':form})
     else:
         return render(request, "scheduler/createschedule.html",{'form':form})
     return render(request, "scheduler/createschedule.html")
+
+@login_required
+def edit_schedule_view(request, scheduleid):
+    schedule = get_object_or_404(Schedule, id=scheduleid)
+    if schedule.creator != request.user:
+        return render(request, "scheduler/errorpage.html", {'message':"PERMISSION DENIED"})
+    if request.method == 'POST':
+        form = ScheduleForm(instance=schedule, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/schedule/"+str(schedule.id))
+        else:
+            return render(request, "scheduler/createschedule.html",{'form':form, 'edit':'edit', 'schedule':schedule})
+    else:
+        form = ScheduleForm(instance=schedule)
+        return render(request, "scheduler/createschedule.html",{'form':form, 'edit':'edit', 'schedule':schedule})
+
+
+@login_required
+def edit_event_view(request, eventid):
+    event = get_object_or_404(Event, id=eventid)
+    if event.schedule.creator != request.user:
+        return render(request, "scheduler/errorpage.html", {'message':"PERMISSION DENIED"})
+    if request.method == 'POST':
+        form = EventForm(instance=event,data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/schedule/"+str(event.schedule.id))
+        else:
+            return render(request, "scheduler/createevent.html",{'form':form,'edit':'edit','event':event})
+    else:
+        form = EventForm(instance=event)
+        return render(request, "scheduler/createevent.html",{'form':form,'edit':'edit','event':event})
 
 def schedule_view(request, scheduleid, view=0, starttime=None):
     if starttime == None:
@@ -228,6 +258,3 @@ def account_page_view(request, userid):
     #returns only public schedules: (Happens when user is not authenticated or user is not friends with the account we're viewing)
     return render(request, "scheduler/user.html",{'schedules':schedules})
     
-
-
-
