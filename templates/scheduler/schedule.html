@@ -65,7 +65,10 @@ body .body {
 
 {% block body %}
 <p>{{ schedule }}</p>
-<p><a href="/createevent/{{ schedule.id }}">Create event on this schedule</a></p>
+<p>
+    <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
+    | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
+</p>
 <p>
     <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
     | <a href="/schedule/{{ schedule.id }}/">This Week</a>
@@ -107,9 +110,11 @@ body .body {
             <ul class="day">
                 <li class="header"> {{ day.date }} </li>
                 {% for event in dayevents %}
-                <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
-                    {{ event }}
-                </li>
+                <a href="/editevent/{{ event.id }}/">
+                    <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
+                        {{ event }}
+                    </li>
+                </a>
                 {% endfor %}
             </ul>
         </li>
