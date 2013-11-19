@@ -51,6 +51,19 @@ ul.timelegend .header {
     position:absolute;
     width:199px;
 }
+.event a {
+    position:absolute;
+    color:white;
+    text-decoration:none;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+}
+event a:hover {
+    color:white;
+    text-decoration:none;
+}
 li.timeblock {
     height: 50px;
     width: 50px;
@@ -110,11 +123,11 @@ body .body {
             <ul class="day">
                 <li class="header"> {{ day.date }} </li>
                 {% for event in dayevents %}
-                <a href="/editevent/{{ event.id }}/">
                     <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
-                        {{ event }}
+                        <a href="/editevent/{{ event.id }}/">
+                            {{ event }}
+                        </a>
                     </li>
-                </a>
                 {% endfor %}
             </ul>
         </li>
