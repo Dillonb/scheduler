@@ -50,6 +50,7 @@ ul.timelegend .header {
     color:white;
     position:absolute;
     width:199px;
+    overflow:auto;
 }
 .event a {
     position:absolute;
@@ -77,7 +78,7 @@ body .body {
 {% endblock %}
 
 {% block body %}
-<p>{{ schedule }}</p>
+<p>{{ schedule.name }}</p>
 <p>Click on an event to edit it.</p>
 <p>
     <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
@@ -126,7 +127,8 @@ body .body {
                 {% for event in dayevents %}
                     <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
                         <a href="/editevent/{{ event.id }}">
-                            {{ event }}
+                            {{ event.name }}
+                            {{ event.start_time }} - {{ event.end_time }}
                         </a>
                     </li>
                 {% endfor %}
