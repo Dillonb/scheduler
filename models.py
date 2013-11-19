@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
+from django.core.exceptions import ValidationError
 
 
 class Schedule(models.Model):
@@ -67,6 +68,15 @@ class Event(models.Model):
 
     def __str__(self):
         return "%s's event, (%s): %s-%s"%(self.schedule.creator.username, self.name, self.start_time, self.end_time)
+
+    def clean(self):
+        # Make sure the event has a duration. (Doesn't start and end at the same time)
+        if self.start_time == self.end_time:
+            raise ValidationError("Event must have a duration.")
+        # make sure the event starts before it ends.
+        if self.start_time > self.end_time:
+            raise ValidationError("Event must start before it ends.")
+
     
     def weekdays(self):
         return [self.sunday, self.monday, self.tuesday, self.wednesday, self.thursday, self.friday, self.saturday]
