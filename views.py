@@ -59,8 +59,8 @@ def create_event_view(request,scheduleid):
 
 @login_required
 def create_schedule_view(request):
-    form = ScheduleForm(data=request.POST) #Load form
     if request.method == 'POST':
+        form = ScheduleForm(data=request.POST) #Load form
         if form.is_valid():
             schedule = form.save(commit = False) #get schedule with form data, doesnt commit
             schedule.creator = request.user #add creator id
@@ -69,8 +69,8 @@ def create_schedule_view(request):
         else:
             return render(request, "scheduler/createschedule.html",{'form':form})
     else:
+        form = ScheduleForm()
         return render(request, "scheduler/createschedule.html",{'form':form})
-    return render(request, "scheduler/createschedule.html")
 
 @login_required
 def edit_schedule_view(request, scheduleid):
