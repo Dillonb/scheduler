@@ -1,5 +1,15 @@
 {% extends "scheduler/base.html" %}
 {% block title %}Account Page of {{ pageuser.username }}{% endblock %}
+{% block head %}
+<style type="text/css">
+#schedule-list {
+    list-style-type:none;
+}
+#schedule-list li {
+    margin-bottom:10px;
+}
+</style>
+{% endblock %}
 {% block body %}
 {% if main %}
 <div class="panel panel-default">
@@ -16,7 +26,7 @@
         <h3 class="panel-title">Other Schedules</h3>
     </div>
     <div class="panel-body">
-        <ul>
+        <ul id="schedule-list">
             {% for schedule in schedules %}
             <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a></li>
             {% endfor %}

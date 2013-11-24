@@ -19,7 +19,7 @@ class Schedule(models.Model):
     name = models.CharField(max_length=150)
 
     def __str__(self):
-        return "%s %s: %s"%(self.creator, self.visibility, self.name)
+        return self.name
 
     def clean(self):
         schedule_is_new = False
