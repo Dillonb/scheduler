@@ -277,3 +277,12 @@ def account_page_view(request, userid):
     #returns only public schedules: (Happens when user is not authenticated or user is not friends with the account we're viewing)
     return render(request, "scheduler/user.html",{'pageuser':user, 'schedules':schedules, 'main':main_schedule})
     
+def set_main_schedule_view(request, scheduleid):
+    schedule = get_object_or_404(Schedule, id=scheduleid)
+    if not schedule.creator == request.user:
+        return render("scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
+    else:
+        profile = Profile.objects.of_user(request.user)
+        profile.main_schedule = schedule
+        profile.save()
+        return redirect("/schedule/"+str(schedule.id))
