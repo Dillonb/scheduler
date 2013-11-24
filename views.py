@@ -249,6 +249,7 @@ def account_page_view(request, userid):
     #Get all the schedules from the user indicated:
     user = get_object_or_404(User, id=userid)
     schedules = Schedule.objects.filter(creator=user, visibility=Schedule.VISIBILITY_PUBLIC)
+    main_schedule = Profile.objects.of_user(user).main_schedule
     #get the friend object of that user
     if request.user.is_authenticated():
         #if the request user is the owner of the profile then they can view friends only schedules and private schedules
@@ -258,7 +259,7 @@ def account_page_view(request, userid):
             #gets friends only schedules:
             friendsOnly = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_FRIENDSONLY)
             #returns public, friends only and private schedules:
-            return render(request, "scheduler/user.html",{'schedules':schedules, 'friendsOnly':friendsOnly, 'private':private})
+            return render(request, "scheduler/user.html",{'pageuser':user, 'schedules':schedules, 'friendsOnly':friendsOnly, 'private':private, 'main':main_schedule})
             #allows friend only schedule viewing:
         else:
             #if the request user isnt the owner of the profile see if they are friends.
@@ -266,7 +267,7 @@ def account_page_view(request, userid):
                 #get friends only schedules:
                 friendsOnly = Schedule.objects.filter(creator=userid, visibility=Schedule.VISIBILITY_FRIENDSONLY)
                 #returns public and friendsonly schedules:
-                return render(request, "scheduler/user.html",{'schedules':schedules, 'friendsOnly':friendsOnly})
+                return render(request, "scheduler/user.html",{'pageuser':user, 'schedules':schedules, 'friendsOnly':friendsOnly, 'main':main_schedule})
     #returns only public schedules: (Happens when user is not authenticated or user is not friends with the account we're viewing)
-    return render(request, "scheduler/user.html",{'schedules':schedules})
+    return render(request, "scheduler/user.html",{'pageuser':user, 'schedules':schedules, 'main':main_schedule})
     

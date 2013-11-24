@@ -1,20 +1,36 @@
 {% extends "scheduler/base.html" %}
-{% block title %}Account Page of {{ user.username }}{% endblock %}
+{% block title %}Account Page of {{ pageuser.username }}{% endblock %}
 {% block body %}
-
-<ul>
-    {% for schedule in schedules %}
-    <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a></li>
-    {% endfor %}
-    {% if friendsOnly %}
-    {% for friendsched in friendsOnly %}
-    <li><a href="/schedule/{{ friendsched.id }}">{{ friendsched }}</a></li>
-    {% endfor %}
-    {% endif %}
-    {% if private %}
-    {% for priv in private %}
-    <li><a href="/schedule/{{ priv.id }}">{{ priv }}</a></li>
-   	{% endfor %}
-    {% endif %}
-</ul>
+{% if main %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Main Schedule</h3>
+    </div>
+    <div class="panel-body">
+        <a href="/schedule/{{ main.id }}">{{ main }}</a>
+    </div>
+</div>
+{% endif %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Other Schedules</h3>
+    </div>
+    <div class="panel-body">
+        <ul>
+            {% for schedule in schedules %}
+            <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a></li>
+            {% endfor %}
+            {% if friendsOnly %}
+            {% for friendsched in friendsOnly %}
+            <li><a href="/schedule/{{ friendsched.id }}">{{ friendsched }}</a></li>
+            {% endfor %}
+            {% endif %}
+            {% if private %}
+            {% for priv in private %}
+            <li><a href="/schedule/{{ priv.id }}">{{ priv }}</a></li>
+            {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
 {% endblock %}
