@@ -79,8 +79,8 @@ body .body {
 
 {% block body %}
 <p>{{ schedule.name }}</p>
-<p>Click on an event to edit it.</p>
 {% if isowner %}
+<p>Click on an event to edit it.</p>
 <p>
     <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
     | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
@@ -133,10 +133,14 @@ body .body {
                 <li class="header"> {{ day.date }} </li>
                 {% for event in dayevents %}
                     <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
+                    {% if isowner %}
                         <a href="/editevent/{{ event.id }}">
+                    {% endif %}
                             {{ event.name }}
                             {{ event.start_time }} - {{ event.end_time }}
+                    {% if isowner %}
                         </a>
+                    {% endif %}
                     </li>
                 {% endfor %}
             </ul>
