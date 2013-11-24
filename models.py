@@ -193,6 +193,18 @@ class Friend(models.Model):
     relationship_creator = models.IntegerField(choices = RELATIONSHIP_CHOICES, default = RELATIONSHIP_UNSPECIFIED) # The relationship between the users from the creator's perspective. (family, friend, coworker, classmate)
     relationship_friend = models.IntegerField(choices = RELATIONSHIP_CHOICES, default = RELATIONSHIP_UNSPECIFIED) # The relationship between the users from the friend's perspective. Can be different than relationship_creator.
 
+    other = None
+    # Only works if self.other is set. It is set from outside by friends_view() normally.
+    def friend_user(self):
+        if self.other == None:
+            return None
+        elif self.other == 0:
+            return self.friend
+        elif self.other == 1:
+            return self.creator
+        else:
+            return None
+
     objects = FriendManager()
 
 class ProfileManager(models.Manager):

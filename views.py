@@ -164,7 +164,6 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
         for day in week:
             events.append((day, Event.objects.on_date(day, schedule)))
 
-        print "isMainSchedule:",isMainSchedule
         return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime, 'isowner':isOwner, 'ismainschedule':isMainSchedule})
     else:
         return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
@@ -176,6 +175,13 @@ def friends_view(request):
     sent_requests = []
     accepted_friends = []
     for friend in friends:
+
+        # Set friend.other so that the view knows which name to show in the friends list.
+        if friend.creator == request.user:
+            friend.other = 0
+        else:
+            friend.other = 1
+
         if friend.status == Friend.STATUS_SENT:
             if friend.creator == request.user:
                 sent_requests.append(friend)

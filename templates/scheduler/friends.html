@@ -1,39 +1,69 @@
 {% extends "scheduler/base.html" %}
+{% block head %}
+<style type="text/css">
+.friend-list {
+    list-style-type:none;
+}
+</style>
+{% endblock %}
 {% block body %}
 
 
 {% if pending_requests %}
-    <ul>
-    {% for request in pending_requests %}
-    
-    <li>Friend request from {{ request.creator }}
-    <a href="/friends/accept/{{ request.id }}">Accept</a>
-    <a href="/friends/decline/{{ request.id }}">Decline</a>
-    </li>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Friend Requests
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="friend-list">
+        {% for request in pending_requests %}
+        
+        <li>Friend request from {{ request.creator }}
+        <a href="/friends/accept/{{ request.id }}">Accept</a>
+        <a href="/friends/decline/{{ request.id }}">Decline</a>
+        </li>
 
-    {% endfor %}
-    </ul>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endif %}
 
 {% if friends %}
-    <h3>Friends</h3>
-    <ul>
-    {% for friend in friends %}
-        <li>{{ friend.creator }} + {{ friend.friend }} : {{ friend.status }}</li>
-    {% endfor %}
-    </ul>
-    <p><a href="/friends/add">Add a friend</a></p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Friends</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="friend-list">
+        {% for friend in friends %}
+        <li><a href="/user/{{ friend.friend_user.id }}">{{ friend.friend_user }}</a></li>
+        {% endfor %}
+        </ul>
+        <p><a href="/friends/add">Add a friend</a></p>
+    </div>
+</div>
 {% else %}
     <h3>You haven't added anyone yet! Would you like to <a href="/friends/add">Add a friend?</a></h3>
 {% endif %}
 
 {% if sent_requests %}
-    <h3>Sent requests</h3>
-    <ul>
-        {% for request in sent_requests %}
-        <li>Pending request sent to {{ request.friend }}</li>
-        {% endfor %}
-    </ul>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Sent requests
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="friend-list">
+            {% for request in sent_requests %}
+            <li>Pending request sent to {{ request.friend }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endif %}
 
 {% endblock %}
