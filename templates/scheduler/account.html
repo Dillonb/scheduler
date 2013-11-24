@@ -3,6 +3,7 @@
 {% block body %}
 Account page...
 <p><a href="/accounts/createschedule/">Create a New Schedule</a></p>
+<p><a href="/user/{{ user.id }}">View My Public Profile</a></p>
 <ul>
     {% for schedule in schedules %}
     <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a></li>
