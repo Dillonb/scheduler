@@ -195,7 +195,25 @@ class Friend(models.Model):
 
     objects = FriendManager()
 
+class ProfileManager(models.Manager):
+    def of_user(self, user):
+        try:
+            return self.get(user=user)
+        except User.DoesNotExist: # If the user doesn't exist, there's nothing we can do.
+            return None
+        except Profile.DoesNotExist: # If the profile doesn't exist, just make one and return it.
+            profile = Profile(user=user)
+            profile.save()
+            return profile
+
+# Holds extra information about a user.
+class Profile(models.Model):
+    user = models.ForeignKey(User)
+    main_schedule = models.ForeignKey(Schedule, related_name="owner_profile", null=True)
+
+    objects = ProfileManager()
 
 admin.site.register(Schedule)
 admin.site.register(Event)
 admin.site.register(Friend)
+admin.site.register(Profile)

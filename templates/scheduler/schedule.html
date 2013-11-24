@@ -80,10 +80,17 @@ body .body {
 {% block body %}
 <p>{{ schedule.name }}</p>
 <p>Click on an event to edit it.</p>
+{% if isowner %}
 <p>
     <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
     | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
+    {% if ismainschedule %}
+    | This is your main schedule.
+    {% else %}
+    | <a href="/setmainschedule/{{ schedule.id }}">Set as main schedule</a>
+    {% endif %}
 </p>
+{% endif %}
 <p>
     <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
     | <a href="/schedule/{{ schedule.id }}/">This Week</a>

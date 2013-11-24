@@ -111,6 +111,8 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
     week = datetime.datetime.fromtimestamp(float(starttime))
     schedule = get_object_or_404(Schedule, id=scheduleid)
     canView = False
+    isOwner = False
+    isMainSchedule = False
     # Schedule is public, allow anyone to view it
     if schedule.visibility == schedule.VISIBILITY_PUBLIC:
         canView = True
@@ -118,6 +120,7 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
         #set canView true if the request user and schedule creator are friends:
         if schedule.creator == request.user:
             canView = True
+            isOwner = True
         else:
             canView = Friend.objects.are_friends(request.user, schedule.creator)
         #if the request user is the creator set canView true:
@@ -129,7 +132,15 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
         else:
             canView = False
     if canView:
-
+        if not isOwner:
+            isOwner = (schedule.creator == request.user)
+        if isOwner:
+            profile = Profile.objects.of_user(schedule.creator)
+            if profile.main_schedule == None:
+                isMainSchedule = False
+            elif profile.main_schedule == schedule:
+                isMainSchedule = (profile.main_schedule == schedule)
+            
         weekday = week.weekday()
         # If sunday, monday is the day after (not 6 days before)
         if weekday == 6:
@@ -153,7 +164,8 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
         for day in week:
             events.append((day, Event.objects.on_date(day, schedule)))
 
-        return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime})
+        print "isMainSchedule:",isMainSchedule
+        return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime, 'isowner':isOwner, 'ismainschedule':isMainSchedule})
     else:
         return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
 
