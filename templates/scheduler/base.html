@@ -42,6 +42,9 @@
                 <li><a href="/accounts/register">Register</a></li>
                 {% endif %}
             </ul>
+            {% if user.is_authenticated %}
+            <p class="navbar-text navbar-right">Signed in as {{ user }}</p>
+            {% endif %}
         </div>
     </div>
 </div>
