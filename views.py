@@ -8,7 +8,8 @@ from django.contrib.auth.decorators import login_required
 from scheduler.forms import EventForm, ScheduleForm, AddFriendForm
 from django.contrib.auth.models import User
 from scheduler.models import *
-from scheduler.functions import datetime_to_week
+from scheduler.functions import datetime_to_week, get_times_when_busy
+from itertools import chain
 
 def home_view(request):
     return render(request,"scheduler/base.html")
@@ -108,8 +109,27 @@ def edit_event_view(request, eventid):
         form = EventForm(instance=event)
         return render(request, "scheduler/createevent.html",{'form':form,'edit':'edit','event':event})
 
-def schedule_compare_view(request, otheruserid, starttime, viewinguserid):
-    pass
+def schedule_compare_view(request, otheruserid, viewinguserid, starttime=None):
+    if starttime == None:
+        starttime = int(time.time())
+
+    user1 = get_object_or_404(User, id=otheruserid)
+    user1profile = Profile.objects.of_user(user1)
+    user2 = get_object_or_404(User, id=viewinguserid)
+    user2profile = Profile.objects.of_user(user2)
+    week = datetime_to_week(datetime.datetime.fromtimestamp(float(starttime)))
+
+    days = []
+    for day in week:
+        user1events = Event.objects.on_date(day, user1profile.main_schedule)
+        user2events = Event.objects.on_date(day, user2profile.main_schedule)
+        allevents = list(chain(user1events,user2events))
+        
+        busy_times = get_times_when_busy(allevents)
+
+        days.append((day, busy_times))
+
+    return render(request, "scheduler/schedule.html", {'events':days, 'starttime':starttime,'user1':user1, 'user2':user2, 'comparing':True})
 
 def schedule_view(request, scheduleid, view=0, starttime=None):
     if starttime == None:
