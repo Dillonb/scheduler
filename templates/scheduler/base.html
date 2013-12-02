@@ -50,7 +50,18 @@
 
 <div class="container body">
 
-{% block body %}EMPTY{% endblock %}
+{% block body %}
+
+{% if request.user.is_authenticated %}
+    <meta http-equiv="REFRESH" content="0;url=/accounts/profile/">
+{% endif %}
+<p>
+    Welcome to Scheduler, a web-based application designed to help you create and share schedules. With Scheduler you can create schedules with varying visibility, add events, share schedules with other registered users, and compare two schedules. To get started, please <a href="/accounts/register/">sign up</a> or <a href="/accounts/login/">log in</a>.
+</p>
+<p>
+    Created by Dillon Beliveau and Elliot DeMatteis for CS fair, Scheduler took shape directly after spending an entire project night in CS Crew thinking of what to make for the CS fair. After getting nowhere for two hours we decided to head home. On the walk to the parking garage we asked each other what our class schedule was the next day. It suddenly dawned upon us that this was the perfect project for us to tackle. Scheduler was born. 
+</p>
+{% endblock %}
 </div>
 </body>
 </html>
