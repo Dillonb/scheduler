@@ -64,7 +64,7 @@ class Event(models.Model):
             )
 
     schedule = models.ForeignKey(Schedule) # Parent schedule
-    visibility = models.IntegerField(choices=VISIBILITY_CHOICES) # Visibility permissions
+    visibility = models.IntegerField(choices=VISIBILITY_CHOICES, default=VISIBILITY_INHERIT) # Visibility permissions
 
     start_time = models.TimeField() # Holds the time the event starts
     end_time = models.TimeField() # Holds the time the event ends
