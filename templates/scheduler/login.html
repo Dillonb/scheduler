@@ -1,5 +1,10 @@
 {% extends "scheduler/base.html" %}
 {% block title %}Login{% endblock %}
+{% block head %}
+{% if request.user.is_authenticated %}
+    <meta http-equiv="REFRESH" content="0;url=/accounts/profile/">
+{% endif %}
+{% endblock %}
 {% block body %}
 {% if form.errors %}
 <p>Incorrect user/password</p>
