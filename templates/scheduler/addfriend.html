@@ -1,4 +1,5 @@
 {% extends "scheduler/base.html" %}
+{% block title %}Add Friend {% endblock %}
 {% block body %}
 <form action="/friends/add/" method="POST">
     {% csrf_token %}
