@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from scheduler.forms import EventForm, ScheduleForm, AddFriendForm
 from django.contrib.auth.models import User
 from scheduler.models import *
+from scheduler.functions import datetime_to_week
 
 def home_view(request):
     return render(request,"scheduler/base.html")
@@ -146,23 +147,7 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
             elif profile.main_schedule == schedule:
                 isMainSchedule = (profile.main_schedule == schedule)
             
-        weekday = week.weekday()
-        # If sunday, monday is the day after (not 6 days before)
-        if weekday == 6:
-            monday = week + datetime.timedelta(days=1)
-        else:
-            # Subtract the day of the week from the current day to get monday.
-            monday = week - datetime.timedelta(days=week.weekday())
-
-        # Create an array of datetime objects holding every day of the (current) week
-        week = [monday - datetime.timedelta(days=1), # Sunday
-                monday,                              # Monday
-                monday + datetime.timedelta(days=1), # Tuesday
-                monday + datetime.timedelta(days=2), # Wednesday
-                monday + datetime.timedelta(days=3), # Thursday
-                monday + datetime.timedelta(days=4), # Friday
-                monday + datetime.timedelta(days=5), # Saturday
-                ]
+        week = datetime_to_week(week)
         events = []
 
         # Fill the events array with tuples containing a datetime object and all the events happening on that day

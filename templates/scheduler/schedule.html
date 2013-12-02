@@ -78,6 +78,7 @@ body .body {
 {% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
 <p>{{ schedule.name }}</p>
 {% if isowner %}
 <p>Click on an event to edit it.</p>
@@ -93,13 +94,30 @@ body .body {
     {% endif %}
 
 </p>
+=======
+{% if comparing %}
+Comparing two schedules.
+{% else %}
+    <p>{{ schedule.name }}</p>
+    {% if isowner %}
+    <p>Click on an event to edit it.</p>
+    <p>
+        <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
+        | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
+        {% if ismainschedule %}
+        | This is your main schedule.
+        {% else %}
+        | <a href="/setmainschedule/{{ schedule.id }}">Set as main schedule</a>
+        {% endif %}
+    </p>
+    {% endif %}
+    <p>
+        <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
+        | <a href="/schedule/{{ schedule.id }}/">This Week</a>
+        | <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"604800" }}">Next Week</a>
+        </p>
+>>>>>>> 8de24385c2987ffc7c6b770f52fba7b8e09d9793
 {% endif %}
-<p>
-    <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
-    | <a href="/schedule/{{ schedule.id }}/">This Week</a>
-    | <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"604800" }}">Next Week</a>
-</p>
-<p>
 <ul class="week">
     <li class="timelegend">
         <ul class="timelegend">
