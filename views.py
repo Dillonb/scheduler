@@ -319,3 +319,9 @@ def delete_schedule_view(request, scheduleid):
         else:
             schedule.delete()
     return redirect("/accounts/profile/")
+
+def stylesheet_view(request,styleid):
+    styleid = int(styleid)
+    if styleid == 0:
+        return render(request, "scheduler/basestyle.css")
+    raise Http404
