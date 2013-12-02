@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
         url(r'^$','scheduler.views.home_view'),
-        url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'scheduler/login.html'}),        
+        url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'scheduler/login.html'}),
         url(r'^accounts/logout/$','scheduler.views.logout_view'),
         url(r'^accounts/is_loggedin/$','scheduler.views.is_loggedin_view'),
         url(r'^accounts/register/$','scheduler.views.register_view'),
@@ -19,5 +19,4 @@ urlpatterns = patterns('',
         url(r'^editschedule/(?P<scheduleid>\d+)$','scheduler.views.edit_schedule_view'),
         url(r'^editevent/(?P<eventid>\d+)$','scheduler.views.edit_event_view'),
         url(r'^setmainschedule/(?P<scheduleid>\d+)$','scheduler.views.set_main_schedule_view'),
-                       
         )
