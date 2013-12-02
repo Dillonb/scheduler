@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 class EventForm(ModelForm):
     class Meta:
         model = Event
-        fields = ['visibility','start_time','end_time','start_date','end_date',
+        fields = ['start_time','end_time','start_date','end_date',
                 'sunday','monday','tuesday','wednesday','thursday','friday','saturday',
                 'name','location','description']
         widgets = {
