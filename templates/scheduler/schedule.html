@@ -1,5 +1,11 @@
 {% extends "scheduler/base.html" %}
-{% block title %}{{ schedule.creator.username }}'s Schedule{% endblock %}
+{% block title %}
+{% if comparing %}
+Comparing your schedule to {{ user1.username }}'s
+{% else %}
+{{ schedule.creator.username }}'s Schedule
+{% endif %}
+{% endblock %}
 {% block head %}
 <link rel="stylesheet" href="/stylesheet1.css">
 {% endblock %}
