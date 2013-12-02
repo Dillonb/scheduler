@@ -107,6 +107,9 @@ def edit_event_view(request, eventid):
         form = EventForm(instance=event)
         return render(request, "scheduler/createevent.html",{'form':form,'edit':'edit','event':event})
 
+def schedule_compare_view(request, otheruserid, starttime, viewinguserid):
+    pass
+
 def schedule_view(request, scheduleid, view=0, starttime=None):
     if starttime == None:
         starttime = int(time.time())
