@@ -291,3 +291,15 @@ def set_main_schedule_view(request, scheduleid):
         profile.main_schedule = schedule
         profile.save()
         return redirect("/schedule/"+str(schedule.id))
+
+def delete_schedule_view(request, scheduleid):
+    schedule = get_object_or_404(Schedule, id=scheduleid)
+    if not schedule.creator == request.user:
+        return render(request, "scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
+    else:
+        if Profile.objects.of_user(schedule.creator).main_schedule == schedule:
+            return render(request, "scheduler/errorpage.html",{'message':"You can't delete your main schedule."})
+
+        else:
+            schedule.delete()
+    return redirect("/accounts/profile/")

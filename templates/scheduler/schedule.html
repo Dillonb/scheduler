@@ -84,11 +84,14 @@ body .body {
 <p>
     <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
     | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
+
     {% if ismainschedule %}
     | This is your main schedule.
     {% else %}
     | <a href="/setmainschedule/{{ schedule.id }}">Set as main schedule</a>
+    | <a href="/deleteschedule/{{ schedule.id }}">Delete schedule </a>
     {% endif %}
+
 </p>
 {% endif %}
 <p>
@@ -135,6 +138,7 @@ body .body {
                     <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
                     {% if isowner %}
                         <a href="/editevent/{{ event.id }}">
+
                     {% endif %}
                             {{ event.name }}
                             {{ event.start_time }} - {{ event.end_time }}
