@@ -24,7 +24,7 @@
         {% if is_self %}
         {% else %}
         |
-        <a href="/schedule/{{ main.id }}/compare/{{ pageuser.id }}">
+        <a href="/schedule/{{ pageuser.id }}/compare/{{ request.user.id }}">
             Compare to my main schedule
         </a>
         {% endif %}
