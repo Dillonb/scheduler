@@ -91,6 +91,8 @@ Comparing two schedules.
         | This is your main schedule.
         {% else %}
         | <a href="/setmainschedule/{{ schedule.id }}">Set as main schedule</a>
+        | <a href="/deleteschedule/{{ schedule.id }}">Delete Schedule</a>
+
         {% endif %}
     </p>
     {% endif %}
