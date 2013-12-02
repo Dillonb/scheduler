@@ -19,9 +19,5 @@ urlpatterns = patterns('',
         url(r'^editschedule/(?P<scheduleid>\d+)$','scheduler.views.edit_schedule_view'),
         url(r'^editevent/(?P<eventid>\d+)$','scheduler.views.edit_event_view'),
         url(r'^setmainschedule/(?P<scheduleid>\d+)$','scheduler.views.set_main_schedule_view'),
-<<<<<<< HEAD
         url(r'^deleteschedule/(?P<scheduleid>\d+)$','scheduler.views.delete_schedule_view'),
-                       
-=======
->>>>>>> 8de24385c2987ffc7c6b770f52fba7b8e09d9793
         )
