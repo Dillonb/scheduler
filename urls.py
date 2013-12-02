@@ -19,6 +19,4 @@ urlpatterns = patterns('',
         url(r'^editschedule/(?P<scheduleid>\d+)$','scheduler.views.edit_schedule_view'),
         url(r'^editevent/(?P<eventid>\d+)$','scheduler.views.edit_event_view'),
         url(r'^setmainschedule/(?P<scheduleid>\d+)$','scheduler.views.set_main_schedule_view'),
-
-
         )
