@@ -323,5 +323,7 @@ def delete_schedule_view(request, scheduleid):
 def stylesheet_view(request,styleid):
     styleid = int(styleid)
     if styleid == 0:
-        return render(request, "scheduler/basestyle.css")
+        return render(request, "scheduler/basestyle.css", content_type="text/css")
+    if styleid == 1:
+        return render(request, "scheduler/schedulestyle.css", content_type="text/css")
     raise Http404

@@ -1,0 +1,72 @@
+.week {
+    list-style-type:none;
+}
+.daycontainer {
+
+    width:200px;
+    height:1220px;
+    margin-left: 4px;
+    margin-right: 4px;
+    float:left;
+    background-image: url("http://199.195.251.194/~dillon/tiledaybg.png");
+    background-attachment:scroll;
+    background-position: 0px 20px;
+    border-style: none solid none solid;
+    border-width:1px;
+}
+li.timelegend {
+    width: 50px;
+    height: 1220px;
+    float:left;
+}
+ul.timelegend {
+    list-style-type:none;
+    width:50px;
+    margin-left: -40px;
+}
+.day {
+    list-style-type:none;
+    margin-left: -40px;
+}
+.header {
+    top:0px;
+    height:20px;
+    background-color:rgb(51,51,51);
+    color:white;
+}
+ul.timelegend .header {
+    width:50px;
+    background-color:white;
+    border-bottom-style:solid;
+    border-bottom-color:black;
+    border-bottom-width:2px;
+}
+.event {
+    background-color:rgba(0,0,0,0.75);
+    color:white;
+    position:absolute;
+    width:199px;
+    overflow:auto;
+}
+.event a {
+    position:absolute;
+    color:white;
+    text-decoration:none;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+}
+event a:hover {
+    color:white;
+    text-decoration:none;
+}
+li.timeblock {
+    height: 50px;
+    width: 50px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+body .body {
+    width: 1600px;
+}
