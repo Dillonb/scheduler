@@ -79,7 +79,8 @@ body .body {
 
 {% block body %}
 {% if comparing %}
-Comparing two schedules.
+<p>Comparing your schedule to {{ user1.username }}'s.</p>
+<p>The dark areas are times where one or both of you are occupied.</p>
 {% else %}
     <p>{{ schedule.name }}</p>
     {% if isowner %}
@@ -138,13 +139,15 @@ Comparing two schedules.
                 <li class="header"> {{ day.date }} </li>
                 {% for event in dayevents %}
                     <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
-                    {% if isowner %}
-                        <a href="/editevent/{{ event.id }}">
-                    {% endif %}
-                            {{ event.name }}
-                            {{ event.start_time }} - {{ event.end_time }}
-                    {% if isowner %}
-                        </a>
+                    {% if not comparing %}
+                        {% if isowner %}
+                            <a href="/editevent/{{ event.id }}">
+                        {% endif %}
+                                {{ event.name }}
+                                {{ event.start_time }} - {{ event.end_time }}
+                        {% if isowner %}
+                            </a>
+                        {% endif %}
                     {% endif %}
                     </li>
                 {% endfor %}
