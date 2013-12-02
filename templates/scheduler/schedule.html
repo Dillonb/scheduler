@@ -81,6 +81,7 @@ body .body {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>{{ schedule.name }}</p>
 {% if isowner %}
 <p>Click on an event to edit it.</p>
@@ -149,6 +150,24 @@ Comparing two schedules.
     </p>
     {% endif %}
 >>>>>>> 8de24385c2987ffc7c6b770f52fba7b8e09d9793
+=======
+{% if comparing %}
+Comparing two schedules.
+{% else %}
+    <p>{{ schedule.name }}</p>
+    {% if isowner %}
+    <p>Click on an event to edit it.</p>
+    <p>
+        <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
+        | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
+        {% if ismainschedule %}
+        | This is your main schedule.
+        {% else %}
+        | <a href="/setmainschedule/{{ schedule.id }}">Set as main schedule</a>
+        {% endif %}
+    </p>
+    {% endif %}
+>>>>>>> 8de24385c2987ffc7c6b770f52fba7b8e09d9793
     <p>
         <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
         | <a href="/schedule/{{ schedule.id }}/">This Week</a>
@@ -156,6 +175,9 @@ Comparing two schedules.
         </p>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 8de24385c2987ffc7c6b770f52fba7b8e09d9793
+=======
 >>>>>>> 8de24385c2987ffc7c6b770f52fba7b8e09d9793
 =======
 >>>>>>> 8de24385c2987ffc7c6b770f52fba7b8e09d9793

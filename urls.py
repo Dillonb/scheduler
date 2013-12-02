@@ -20,4 +20,5 @@ urlpatterns = patterns('',
         url(r'^editevent/(?P<eventid>\d+)$','scheduler.views.edit_event_view'),
         url(r'^setmainschedule/(?P<scheduleid>\d+)$','scheduler.views.set_main_schedule_view'),
 
+
         )
