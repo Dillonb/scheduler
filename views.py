@@ -12,6 +12,8 @@ from scheduler.functions import datetime_to_week, get_times_when_busy
 from itertools import chain
 
 def home_view(request):
+    if request.user.is_authenticated:
+        return redirect('/accounts/profile')
     return render(request,"scheduler/base.html")
 
 def logout_view(request):
