@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 {% if user.is_authenticated %}
-                <li{% if request.path == '/accounts/profile/' %} class="active"{% endif %}><a href="/accounts/profile/">Home</a></li>
+                <li{% if request.path == '/accounts/profile/' %} class="active"{% endif %}><a href="/accounts/profile/">My Account</a></li>
                 <li{% if request.path == '/friends/' %} class="active"{% endif %}><a href="/friends/">Friends</a></li>
                 <li><a href="/accounts/logout">Logout</a></li>
                 {% else %}
