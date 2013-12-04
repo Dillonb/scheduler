@@ -84,8 +84,14 @@ def get_times_when_busy(events):
                 events.append(combine_events(event, event2))
                 # Remove the two events we just combined from the list so they don't get processed again.
 
-                events.remove(event)
-                events.remove(event2)
+                try:
+                    events.remove(event)
+                except ValueError:
+                    pass
+                try:
+                    events.remove(event2)
+                except ValueError:
+                    pass
     if had_an_overlap:
         return get_times_when_busy(events) # Recurse and check again.
     else:
