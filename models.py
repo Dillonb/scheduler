@@ -118,6 +118,9 @@ class FriendManager(models.Manager):
         # Check both orientations of the friend object.
         friend = self.get_friend_object(user, other)
 
+        if friend == None:
+            return False # If there is no friend object, they are not friends.
+
         if friend.status == Friend.STATUS_SENT: # If a request has not been accepted
             return False # The users are not friends yet.
         return True # Otherwise they are.
