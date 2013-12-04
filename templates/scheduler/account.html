@@ -24,11 +24,15 @@
         </h3>
     </div>
     <div class="panel-body">
+        {% if schedules %}
         <ul>
             {% for schedule in schedules %}
             <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a></li>
             {% endfor %}
         </ul>
+        {% else %}
+            <h3>You have not created any schedules yet!</h3>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
