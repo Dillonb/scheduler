@@ -1,7 +1,7 @@
 {% extends "scheduler/base.html" %}
 {% block title %}
 {% if comparing %}
-Comparing your schedule to {{ user1.username }}'s
+Comparing your schedule to {{ otheruser.username }}'s
 {% else %}
 {{ schedule.creator.username }}'s Schedule
 {% endif %}
@@ -12,8 +12,13 @@ Comparing your schedule to {{ user1.username }}'s
 
 {% block body %}
 {% if comparing %}
-<p>Comparing your schedule to {{ user1.username }}'s.</p>
+<p>Comparing your schedule to {{ otheruser.username }}'s.</p>
 <p>The dark areas are times where one or both of you are occupied.</p>
+<p>
+    <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
+   | <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}">This Week</a>
+   | <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"604800" }}">Next Week</a>
+</p>
 {% else %}
     <p>{{ schedule.name }}</p>
     {% if isowner %}

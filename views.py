@@ -131,7 +131,7 @@ def schedule_compare_view(request, otheruserid, viewinguserid, starttime=None):
 
         days.append((day, busy_times))
 
-    return render(request, "scheduler/schedule.html", {'events':days, 'starttime':starttime,'user1':user1, 'user2':user2, 'comparing':True})
+    return render(request, "scheduler/schedule.html", {'events':days, 'starttime':starttime,'otheruser':user1, 'viewinguser':user2, 'comparing':True})
 
 def schedule_view(request, scheduleid, view=0, starttime=None):
     if starttime == None:
