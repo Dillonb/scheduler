@@ -12,7 +12,7 @@ from scheduler.functions import datetime_to_week, get_times_when_busy
 from itertools import chain
 
 def home_view(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         return redirect('/accounts/profile')
     return render(request,"scheduler/base.html")
 
@@ -271,7 +271,7 @@ def account_page_view(request, userid):
     # Check if the user viewing the page has a main schedule
     request_user_has_main_schedule = False
     # If they're not authenticated, they can't possibly have a main schedule.
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         # Check the request user's profile to see if they have a main schedule.
         request_user_profile = Profile.objects.of_user(request.user)
         # If the request user's main schedule is NOT None, then they have a main schedule.
