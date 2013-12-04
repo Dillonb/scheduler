@@ -51,8 +51,8 @@ def create_event_view(request,scheduleid):
     # If the current user does not own the schedule, do not allow them to create an event on it.
     if schedule.creator != request.user:
         return render(request, "scheduler/errorpage.html", {'message':"PERMISSION DENIED"})
-    form = EventForm(data=request.POST) # Load the form
     if request.method == 'POST':
+        form = EventForm(data=request.POST) # Load the form
         if form.is_valid():
             event = form.save(commit = False) # Get an event with the form data (don't commit to db yet)
             event.schedule = schedule # Set the parent schedule
@@ -61,6 +61,7 @@ def create_event_view(request,scheduleid):
         else:
             return render(request, "scheduler/createevent.html",{'form':form,'schedule':schedule})
     else:
+        form = EventForm()
         return render(request, "scheduler/createevent.html",{'form':form,'schedule':schedule})
 
 @login_required
