@@ -27,7 +27,7 @@ def is_loggedin_view(request):
         return HttpResponse("You are not logged in.")
 
 def register_view(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         return redirect('/')
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
