@@ -43,13 +43,12 @@
         <li><a href="/user/{{ friend.friend_user.id }}">{{ friend.friend_user }}</a></li>
         {% endfor %}
         </ul>
-        <p><a href="/friends/add">Add a friend</a></p>
     </div>
 </div>
 {% else %}
 {% if not pending_requests %}
     {% if not sent_requests %}
-        <h3>You haven't added anyone yet! Would you like to <a href="/friends/add">Add a friend?</a></h3>
+        <h3>You haven't added anyone yet!</h3>
         {% endif %}
     {% endif %}
 {% endif %}
@@ -70,5 +69,16 @@
     </div>
 </div>
 {% endif %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Add a Friend
+        </h3>
+    </div>
+    <div class="panel-body">
+        <p><a href="/friends/add">Add a friend</a></p>
+    </div>
+</div>
 
 {% endblock %}
