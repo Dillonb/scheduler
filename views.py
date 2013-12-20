@@ -44,7 +44,7 @@ def register_view(request):
 def account_view(request):
     schedules = Schedule.objects.filter(creator=request.user)
     return render(request, "scheduler/account.html",{'schedules':schedules})
-    
+
 @login_required
 def create_event_view(request,scheduleid):
     schedule = get_object_or_404(Schedule, id=scheduleid) # The parent schedule
@@ -57,7 +57,7 @@ def create_event_view(request,scheduleid):
             event = form.save(commit = False) # Get an event with the form data (don't commit to db yet)
             event.schedule = schedule # Set the parent schedule
             event.save() # NOW we can save to the database.
-            return redirect("/schedule/"+str(event.schedule.id)) 
+            return redirect("/schedule/"+str(event.schedule.id))
         else:
             return render(request, "scheduler/createevent.html",{'form':form,'schedule':schedule})
     else:
@@ -127,7 +127,7 @@ def schedule_compare_view(request, otheruserid, viewinguserid, starttime=None):
         user1events = Event.objects.on_date(day, user1profile.main_schedule)
         user2events = Event.objects.on_date(day, user2profile.main_schedule)
         allevents = list(chain(user1events,user2events))
-        
+
         busy_times = get_times_when_busy(allevents)
 
         days.append((day, busy_times))
@@ -169,7 +169,7 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
                 isMainSchedule = False
             elif profile.main_schedule == schedule:
                 isMainSchedule = (profile.main_schedule == schedule)
-            
+
         week = datetime_to_week(week)
         events = []
 
@@ -278,7 +278,7 @@ def account_page_view(request, userid):
         # If the request user's main schedule is NOT None, then they have a main schedule.
         if not request_user_profile.main_schedule == None:
             request_user_has_main_schedule = True
-            
+
 
     #get the friend object of that user
     if request.user.is_authenticated():
@@ -300,7 +300,7 @@ def account_page_view(request, userid):
                 return render(request, "scheduler/user.html",{'pageuser':user, 'schedules':schedules, 'friendsOnly':friendsOnly, 'main':main_schedule,'request_user_has_main_schedule':request_user_has_main_schedule})
     #returns only public schedules: (Happens when user is not authenticated or user is not friends with the account we're viewing)
     return render(request, "scheduler/user.html",{'pageuser':user, 'schedules':schedules, 'main':main_schedule,'request_user_has_main_schedule':request_user_has_main_schedule})
-    
+
 def set_main_schedule_view(request, scheduleid):
     schedule = get_object_or_404(Schedule, id=scheduleid)
     if not schedule.creator == request.user:
