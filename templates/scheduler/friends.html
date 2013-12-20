@@ -20,7 +20,7 @@
     <div class="panel-body">
         <ul class="friend-list">
         {% for request in pending_requests %}
-        
+
         <li>Friend request from {{ request.creator }}
         <a href="/friends/accept/{{ request.id }}">Accept</a>
         <a href="/friends/decline/{{ request.id }}">Decline</a>

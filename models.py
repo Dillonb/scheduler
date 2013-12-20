@@ -98,7 +98,7 @@ class Event(models.Model):
         if self.start_time > self.end_time:
             raise ValidationError("Event must start before it ends.")
 
-    
+
     def weekdays(self):
         return [self.sunday, self.monday, self.tuesday, self.wednesday, self.thursday, self.friday, self.saturday]
 
@@ -157,7 +157,7 @@ class FriendManager(models.Manager):
         for friend in self.filter(friend=user, status=Friend.STATUS_SENT).select_related(depth=1):
             friends.append(friend)
         return friends
-    
+
     def friend_requests_sent_for_user(self, user):
         friends = []
         for friend in self.filter(creator=user, status=Friend.STATUS_SENT).select_related(depth=1):
