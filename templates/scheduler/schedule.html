@@ -71,10 +71,14 @@ Comparing your schedule to {{ otheruser.username }}'s
             <li class="timeblock">23:00</li>
         </ul>
     </li>
+
     {% for day, dayevents in events %}
-        <li class="daycontainer">
+   
+            <li class="daycontainer">http://puu.sh/6mlR2.png
             <ul class="day">
-                <li class="header"> {{ day.date }} </li>
+                <li class="header">{{day.date|date:"l"}} {{ day.date }} </li>
+                
+                
                 {% for event in dayevents %}
                     <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
                     {% if not comparing %}
@@ -89,8 +93,10 @@ Comparing your schedule to {{ otheruser.username }}'s
                     {% endif %}
                     </li>
                 {% endfor %}
+              
             </ul>
         </li>
     {% endfor %}
 </ul>
 {% endblock %}
+
