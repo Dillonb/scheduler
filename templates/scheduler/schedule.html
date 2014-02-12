@@ -8,6 +8,25 @@ Comparing your schedule to {{ otheruser.username }}'s
 {% endblock %}
 {% block head %}
 <link rel="stylesheet" href="/stylesheet1.css">
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+$( window ).scroll(function() {
+    if ($(window).scrollTop() > 65)
+    {
+        if (!$("#weekcontainer").hasClass("scrolleddown"))
+        {
+            $("#weekcontainer").addClass("scrolleddown");
+        }
+    }
+    else
+    {
+        if ($("#weekcontainer").hasClass("scrolleddown"))
+        {
+            $("#weekcontainer").removeClass("scrolleddown");
+        }
+    }
+});
+</script>
 {% endblock %}
 
 {% block body %}
@@ -41,7 +60,7 @@ Comparing your schedule to {{ otheruser.username }}'s
         | <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"604800" }}">Next Week</a>
         </p>
 {% endif %}
-<ul class="week">
+<ul id="weekcontainer" class="week">
     <li class="timelegend">
         <ul class="timelegend">
             <li class="header">asdf</li>
