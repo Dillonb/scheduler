@@ -10,22 +10,39 @@ Comparing your schedule to {{ otheruser.username }}'s
 <link rel="stylesheet" href="/stylesheet1.css">
 <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
-$( window ).scroll(function() {
-    if ($(window).scrollTop() > 65)
+    $( window ).scroll(function()
     {
-        if (!$("#weekcontainer").hasClass("scrolleddown"))
+        if ($(window).scrollTop() > 65)
         {
-            $("#weekcontainer").addClass("scrolleddown");
+            if (!$("#weekcontainer").hasClass("scrolleddown"))
+            {
+                $("#weekcontainer").addClass("scrolleddown");
+            }
         }
-    }
-    else
+        else
+        {
+            if ($("#weekcontainer").hasClass("scrolleddown"))
+            {
+                $("#weekcontainer").removeClass("scrolleddown");
+            }
+        }
+    });
+    function scrollTo(element)
     {
-        if ($("#weekcontainer").hasClass("scrolleddown"))
+        $('html,body').unbind().animate({scrollTop: $(element).offset().top-90},'slow');
+    };
+    $( document ).ready(function()
+    {
+        // When the page first loads, scroll to the appropriate place.
+        scrollTo(window.location.hash);
+        // When the user clicks on a "time block" (The time legend displayed on the left side)
+        // Scroll to the time they clicked.
+        $(".timeblock").click(function()
         {
-            $("#weekcontainer").removeClass("scrolleddown");
-        }
-    }
-});
+            scrollTo("#"+this.id);
+            window.location.hash = "#"+this.id;
+        });
+    });
 </script>
 {% endblock %}
 
@@ -64,30 +81,30 @@ $( window ).scroll(function() {
     <li class="timelegend">
         <ul class="timelegend">
             <li class="header">asdf</li>
-            <li class="timeblock">0:00</li>
-            <li class="timeblock">1:00</li>
-            <li class="timeblock">2:00</li>
-            <li class="timeblock">3:00</li>
-            <li class="timeblock">4:00</li>
-            <li class="timeblock">5:00</li>
-            <li class="timeblock">6:00</li>
-            <li class="timeblock">7:00</li>
-            <li class="timeblock">8:00</li>
-            <li class="timeblock">9:00</li>
-            <li class="timeblock">10:00</li>
-            <li class="timeblock">11:00</li>
-            <li class="timeblock">12:00</li>
-            <li class="timeblock">13:00</li>
-            <li class="timeblock">14:00</li>
-            <li class="timeblock">15:00</li>
-            <li class="timeblock">16:00</li>
-            <li class="timeblock">17:00</li>
-            <li class="timeblock">18:00</li>
-            <li class="timeblock">19:00</li>
-            <li class="timeblock">20:00</li>
-            <li class="timeblock">21:00</li>
-            <li class="timeblock">22:00</li>
-            <li class="timeblock">23:00</li>
+            <li class="timeblock" id="000">0:00</a></li>
+            <li class="timeblock" id="100">1:00</a></li>
+            <li class="timeblock" id="200">2:00</li>
+            <li class="timeblock" id="300">3:00</li>
+            <li class="timeblock" id="400">4:00</li>
+            <li class="timeblock" id="500">5:00</li>
+            <li class="timeblock" id="600">6:00</li>
+            <li class="timeblock" id="700">7:00</li>
+            <li class="timeblock" id="800">8:00</li>
+            <li class="timeblock" id="900">9:00</li>
+            <li class="timeblock" id="1000">10:00</li>
+            <li class="timeblock" id="1100">11:00</li>
+            <li class="timeblock" id="1200">12:00</li>
+            <li class="timeblock" id="1300">13:00</li>
+            <li class="timeblock" id="1400">14:00</li>
+            <li class="timeblock" id="1500">15:00</li>
+            <li class="timeblock" id="1600">16:00</li>
+            <li class="timeblock" id="1700">17:00</li>
+            <li class="timeblock" id="1800">18:00</li>
+            <li class="timeblock" id="1900">19:00</li>
+            <li class="timeblock" id="2000">20:00</li>
+            <li class="timeblock" id="2100">21:00</li>
+            <li class="timeblock" id="2200">22:00</li>
+            <li class="timeblock" id="2300">23:00</li>
         </ul>
     </li>
 

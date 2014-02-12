@@ -82,6 +82,8 @@ li.timeblock {
     width: 50px;
     border-bottom-style: solid;
     border-bottom-width: 2px;
+    cursor:pointer;
+    cursor:hand;
 }
 body .body {
     width: 1600px;
