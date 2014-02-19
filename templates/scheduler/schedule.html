@@ -18,11 +18,13 @@ Comparing your schedule to {{ otheruser.username }}'s
             {
                 $("#weekcontainer").addClass("scrolleddown");
             }
+            $("ul.scrolleddown ul.day li.header").css("margin-left", $(window).scrollLeft() * -1);
         }
         else
         {
             if ($("#weekcontainer").hasClass("scrolleddown"))
             {
+                $("ul.scrolleddown ul.day li.header").css("margin-left", 0);
                 $("#weekcontainer").removeClass("scrolleddown");
             }
         }
