@@ -111,12 +111,12 @@ Comparing your schedule to {{ otheruser.username }}'s
     </li>
 
     {% for day, dayevents in events %}
-   
+
             <li class="daycontainer">
             <ul class="day">
                 <li class="header">{{day.date|date:"l"}} {{ day.date }} </li>
-                
-                
+
+
                 {% for event in dayevents %}
                     <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
                     {% if not comparing %}
@@ -131,7 +131,7 @@ Comparing your schedule to {{ otheruser.username }}'s
                     {% endif %}
                     </li>
                 {% endfor %}
-              
+
             </ul>
         </li>
     {% endfor %}
