@@ -12,7 +12,7 @@ Comparing your schedule to {{ otheruser.username }}'s
 <script>
     $( window ).scroll(function()
     {
-        if ($(window).scrollTop() > 65)
+        if ($(window).scrollTop() > $("ul#weekcontainer").offset().top-51)
         {
             if (!$("#weekcontainer").hasClass("scrolleddown"))
             {
