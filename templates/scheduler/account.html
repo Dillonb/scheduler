@@ -27,7 +27,7 @@
         {% if schedules %}
         <ul>
             {% for schedule in schedules %}
-            <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a></li>
+            <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a> - {{ schedule.get_visibility_display }} </li>
             {% endfor %}
         </ul>
         {% else %}
