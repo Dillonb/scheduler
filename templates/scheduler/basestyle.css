@@ -1,3 +1,13 @@
 body {
     padding-top:55px;
 }
+
+p.navbar-text.navbar-right a {
+	color: #999;
+	padding: 15px;
+}
+
+p.navbar-text.navbar-right a:hover {
+	text-decoration: none;
+	color: #fff;
+}
