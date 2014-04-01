@@ -15,7 +15,7 @@ class Schedule(models.Model):
             (VISIBILITY_PRIVATE, "Private")
             )
     creator = models.ForeignKey(User)
-    visibility = models.IntegerField(choices=VISIBILITY_CHOICES)
+    visibility = models.IntegerField(choices=VISIBILITY_CHOICES, default=VISIBILITY_PUBLIC)
     name = models.CharField(max_length=150)
 
     def __str__(self):
