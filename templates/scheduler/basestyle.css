@@ -2,6 +2,7 @@ body {
     padding-top:55px;
 }
 
+/*Username Link in Nav*/
 p.navbar-text.navbar-right a {
 	color: #999;
 	padding: 15px;
@@ -11,3 +12,4 @@ p.navbar-text.navbar-right a:hover {
 	text-decoration: none;
 	color: #fff;
 }
+/*End - Username Link in Nav*/
