@@ -91,6 +91,11 @@ class Event(models.Model):
         return "%s's event, (%s): %s-%s"%(self.schedule.creator.username, self.name, self.start_time, self.end_time)
 
     def clean(self):
+        # Make sure a start and end time are set.
+        if self.start_time == None:
+            raise ValidationError("You must specify a start time.")
+        if self.end_time == None:
+            raise ValidationError("You must specify an end time.")
         # Make sure the event has a duration. (Doesn't start and end at the same time)
         if self.start_time == self.end_time:
             raise ValidationError("Event must have a duration.")
