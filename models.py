@@ -97,6 +97,8 @@ class Event(models.Model):
         # make sure the event starts before it ends.
         if self.start_time > self.end_time:
             raise ValidationError("Event must start before it ends.")
+        if not (self.sunday or self.monday or self.tuesday or self.wednesday or self.thursday or self.friday or self.saturday):
+            raise ValidationError("Event must happen on at least one day.")
 
 
     def weekdays(self):
