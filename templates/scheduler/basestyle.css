@@ -14,5 +14,7 @@ p.navbar-text.navbar-right a:hover {
 }
 
 /*End - Username Link in Nav*/
-
+/*create event form styling*/
 span.formItem::before{content: "\a"; white-space: pre;}
+span.formItem label{width:6em;}
+/*end- create event styling */
