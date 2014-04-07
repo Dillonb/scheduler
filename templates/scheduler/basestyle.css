@@ -17,4 +17,9 @@ p.navbar-text.navbar-right a:hover {
 /*create event form styling*/
 span.formTime::before, span.formDate::before, span.formMisc::before, span#sunday::before{content: "\a"; white-space: pre;}
 span.formItem label{width:6em;}
+span.formWeek label
+{
+	width: auto;
+	padding:0 .2em;
+}
 /*end- create event styling */
