@@ -18,7 +18,20 @@
 <form action="/createevent/{{ schedule.id }}" method="POST">
 {% endif %}
     {% csrf_token %}
-    {{ form.as_p }}
+    <span><label for="id_start_time">Start time:</label> <input id="id_start_time" name="start_time" type="text"></span>
+	<span><label for="id_end_time">End time:</label> <input id="id_end_time" name="end_time" type="text"></span>
+	<span><label for="id_start_date">Start date:</label> <input class="datepicker hasDatepicker" id="id_start_date" name="start_date" type="text"></span>
+	<span><label for="id_end_date">End date:</label> <input class="datepicker hasDatepicker" id="id_end_date" name="end_date" type="text"></span>
+	<span><input id="id_sunday" name="sunday" type="checkbox"><label for="id_sunday"> Sunday</label></span>
+	<span><input id="id_monday" name="monday" type="checkbox"><label for="id_monday"> Monday</label></span>
+	<span><input id="id_tuesday" name="tuesday" type="checkbox"><label for="id_tuesday"> Tuesday</label></span>
+	<span><input id="id_wednesday" name="wednesday" type="checkbox"><label for="id_wednesday"> Wednesday</label></span>
+	<span><input id="id_thursday" name="thursday" type="checkbox"><label for="id_thursday"> Thursday</label></span>
+	<span><input id="id_friday" name="friday" type="checkbox"><label for="id_friday"> Friday</label></span>
+	<span><input id="id_saturday" name="saturday" type="checkbox"><label for="id_saturday"> Saturday</label></span>
+	<span><label for="id_name">Name:</label> <input id="id_name" maxlength="50" name="name" type="text"></span>
+	<span><label for="id_location">Location:</label> <input id="id_location" maxlength="250" name="location" type="text"></span>
+	<span><label for="id_description">Description:</label> <textarea cols="40" id="id_description" name="description" rows="10"></textarea></span>
     <input type="submit">
 </form>
 {% endblock %}
