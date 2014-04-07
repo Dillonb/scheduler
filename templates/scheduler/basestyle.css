@@ -12,4 +12,7 @@ p.navbar-text.navbar-right a:hover {
 	text-decoration: none;
 	color: #fff;
 }
+
 /*End - Username Link in Nav*/
+
+span.formItem::before{content: "\a"; white-space: pre;}
