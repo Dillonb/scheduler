@@ -18,20 +18,20 @@
 <form action="/createevent/{{ schedule.id }}" method="POST">
 {% endif %}
     {% csrf_token %}
-    <span><label for="id_start_time">Start time:</label> {{ form.start_time }}</span>
-	<span><label for="id_end_time">End time:</label> {{ form.end_time }}</span>
-	<span><label for="id_start_date">Start date:</label> {{ form.start_date }}</span>
-	<span><label for="id_end_date">End date:</label> {{ form.end_date }}</span>
-	<span>{{ form.sunday }}<label for="id_sunday"> Sunday</label></span>
-	<span>{{ form.monday }}<label for="id_monday"> Monday</label></span>
-	<span>{{ form.tuesday }}<label for="id_tuesday"> Tuesday</label></span>
-	<span>{{ form.wednesday }}<label for="id_wednesday"> Wednesday</label></span>
-	<span>{{ form.thursday }}<label for="id_thursday"> Thursday</label></span>
-	<span>{{ form.friday }}<label for="id_friday"> Friday</label></span>
-	<span>{{ form.saturday }}<label for="id_saturday"> Saturday</label></span>
-	<span><label for="id_name">Name:</label> {{ form.name }}</span>
-	<span><label for="id_location">Location:</label> {{ form.location }}</span>
-	<span><label for="id_description">Description:</label> {{ form.description }}</span>
+    <span class = "formItem"><label for="id_start_time">Start time:</label> {{ form.start_time }}</span>
+	<span class = "formItem"><label for="id_end_time">End time:</label> {{ form.end_time }}</span>
+	<span class = "formItem"><label for="id_start_date">Start date:</label> {{ form.start_date }}</span>
+	<span class = "formItem"><label for="id_end_date">End date:</label> {{ form.end_date }}</span>
+	<span class = "formItem">{{ form.sunday }}<label for="id_sunday"> Sunday</label></span>
+	<span class = "formItem">{{ form.monday }}<label for="id_monday"> Monday</label></span>
+	<span class = "formItem">{{ form.tuesday }}<label for="id_tuesday"> Tuesday</label></span>
+	<span class = "formItem">{{ form.wednesday }}<label for="id_wednesday"> Wednesday</label></span>
+	<span class = "formItem">{{ form.thursday }}<label for="id_thursday"> Thursday</label></span>
+	<span class = "formItem">{{ form.friday }}<label for="id_friday"> Friday</label></span>
+	<span class = "formItem">{{ form.saturday }}<label for="id_saturday"> Saturday</label></span>
+	<span class = "formItem"><label for="id_name">Name:</label> {{ form.name }}</span>
+	<span class = "formItem"><label for="id_location">Location:</label> {{ form.location }}</span>
+	<span class = "formItem"><label for="id_description">Description:</label> {{ form.description }}</span>
     <input type="submit">
 </form>
 {% endblock %}
