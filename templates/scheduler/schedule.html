@@ -8,8 +8,10 @@ Comparing your schedule to {{ otheruser.username }}'s
 {% endblock %}
 {% block head %}
 <link rel="stylesheet" href="/stylesheet1.css">
-<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
+    $(function() {
+        $(".datepicker").datepicker();
+    });
     $( window ).scroll(function()
     {
         if ($(window).scrollTop() > $("ul#weekcontainer").offset().top-51)
@@ -33,6 +35,11 @@ Comparing your schedule to {{ otheruser.username }}'s
     {
         $('html,body').unbind().animate({scrollTop: $(element).offset().top-90},'fast');
     };
+    function redirect()
+    {
+        var newdate = $.datepicker.parseDate("mm/dd/yy", $("#newdate").val());
+        window.location.href="/schedule/{{ schedule.id }}/"+(newdate.getTime()/1000);
+    }
     $( document ).ready(function()
     {
         // When the page first loads, scroll to the appropriate place.
@@ -49,36 +56,49 @@ Comparing your schedule to {{ otheruser.username }}'s
 {% endblock %}
 
 {% block body %}
-{% if comparing %}
-<p>Comparing your schedule to {{ otheruser.username }}'s.</p>
-<p>The dark areas are times where one or both of you are occupied.</p>
-<p>
-    <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
-   | <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}">This Week</a>
-   | <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"604800" }}">Next Week</a>
-</p>
-{% else %}
-    <p>{{ schedule.name }}</p>
-    {% if isowner %}
-    <p>Click on an event to edit it.</p>
-    <p>
-        <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
-        | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
-        {% if ismainschedule %}
-        | This is your main schedule.
-        {% else %}
-        | <a href="/setmainschedule/{{ schedule.id }}">Set as main schedule</a>
-        | <a href="/deleteschedule/{{ schedule.id }}">Delete Schedule</a>
-
-        {% endif %}
-    </p>
-    {% endif %}
-    <p>
-        <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
-        | <a href="/schedule/{{ schedule.id }}/">This Week</a>
-        | <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"604800" }}">Next Week</a>
+<div class="row">
+    <div class="col-md-6">
+        {% if comparing %}
+        <p>Comparing your schedule to {{ otheruser.username }}'s.</p>
+        <p>The dark areas are times where one or both of you are occupied.</p>
+        <p>
+            <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
+        | <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}">This Week</a>
+        | <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"604800" }}">Next Week</a>
         </p>
-{% endif %}
+        {% else %}
+            <p>{{ schedule.name }}</p>
+            {% if isowner %}
+            <p>Click on an event to edit it.</p>
+            <p>
+                <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
+                | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
+                {% if ismainschedule %}
+                | This is your main schedule.
+                {% else %}
+                | <a href="/setmainschedule/{{ schedule.id }}">Set as main schedule</a>
+                | <a href="/deleteschedule/{{ schedule.id }}">Delete Schedule</a>
+
+                {% endif %}
+            </p>
+            {% endif %}
+            <p>
+                <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
+                | <a href="/schedule/{{ schedule.id }}/">This Week</a>
+                | <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"604800" }}">Next Week</a>
+                </p>
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <p>Jump to new date</p>
+        <p>
+                <form>
+                    <input type="text" id="newdate" class="datepicker"></input>
+                    <button type="button" id="jumpdatebutton" onClick="redirect();">Go</button>
+                </form>
+        </p>
+    </div>
+</div>
 <ul id="weekcontainer" class="week">
     <li class="timelegend">
         <ul class="timelegend">
