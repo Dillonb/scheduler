@@ -17,6 +17,11 @@
 <h3>All times are in 24 hour format.</h3>
 <form action="/createevent/{{ schedule.id }}" method="POST">
 {% endif %}
+{% if form.non_field_errors %}
+	<div class= "alert alert-danger">
+		{{ form.non_field_errors }}
+	</div>
+{% endif %}
     {% csrf_token %}
     <span class = "formItem formTime" id = "startTime">
     	<label for="id_start_time">Start time:</label> 
@@ -30,10 +35,20 @@
 		<label for="id_start_date">Start date:</label> 
 		{{ form.start_date }}
 	</span>
+{% if form.start_date.errors %}
+	<div class = "field-error">
+		{{form.start_date.errors}}
+	</div>
+{% endif %}
 	<span class = "formItem formDate" id = "endDate">
 		<label for="id_end_date">End date:</label> 
 		{{ form.end_date }}
 	</span>
+{% if form.end_date.errors %}
+	<div class = "field-error">
+		{{form.end_date.errors}}
+	</div>
+{% endif %}
 	<span class = "formItem formWeek" id = "sunday">
 		{{ form.sunday }}
 		<label for="id_sunday"> Sunday</label>
@@ -66,6 +81,11 @@
 		<label for="id_name">Name:</label> 
 		{{ form.name }}
 	</span>
+{% if form.name.errors %}
+	<div class = "field-error">
+		{{form.name.errors}}
+	</div>
+{% endif %}
 	<span class = "formItem formMisc" id = "locationField">
 		<label for="id_location">Location:</label> 
 		{{ form.location }}

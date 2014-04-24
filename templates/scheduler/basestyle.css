@@ -23,3 +23,7 @@ span.formWeek label
 	padding:0 .2em;
 }
 /*end- create event styling */
+
+form div.field-error {
+	display: inline-block;
+}

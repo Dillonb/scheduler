@@ -83,7 +83,7 @@ class Event(models.Model):
 
     name = models.CharField(max_length=50) # Name of the event. Short and sweet.
     location = models.CharField(max_length=250) # The location of the event. Address?
-    description = models.TextField() # Description of event
+    description = models.TextField(blank=True) # Description of event
 
     objects = EventManager()
 
