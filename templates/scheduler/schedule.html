@@ -57,45 +57,74 @@ Comparing your schedule to {{ otheruser.username }}'s
 
 {% block body %}
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         {% if comparing %}
         <p>Comparing your schedule to {{ otheruser.username }}'s.</p>
         <p>The dark areas are times where one or both of you are occupied.</p>
-        <p>
-            <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
-        | <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}">This Week</a>
-        | <a href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"604800" }}">Next Week</a>
-        </p>
         {% else %}
-            <p>{{ schedule.name }}</p>
             {% if isowner %}
-            <p>Click on an event to edit it.</p>
-            <p>
-                <a href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
-                | <a href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
-                {% if ismainschedule %}
-                | This is your main schedule.
-                {% else %}
-                | <a href="/setmainschedule/{{ schedule.id }}">Set as main schedule</a>
-                | <a href="/deleteschedule/{{ schedule.id }}">Delete Schedule</a>
-
-                {% endif %}
-            </p>
+                <p>Click on an event to edit it.</p>
             {% endif %}
-            <p>
-                <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}">Previous Week</a>
-                | <a href="/schedule/{{ schedule.id }}/">This Week</a>
-                | <a href="/schedule/{{ schedule.id }}/{{ starttime|add:"604800" }}">Next Week</a>
-                </p>
         {% endif %}
     </div>
-    <div class="col-md-6">
-        <p>Jump to new date</p>
+</div>
+<div class="row scheduleinfo">
+    <div class="col-md-10 leftalign">
+        <div class="btn-group">
+            {% if not comparing %}
+                {% if isowner %}
+                    <a class="btn btn-default" href="/createevent/{{ schedule.id }}">Create event on this schedule</a>
+                    <a class="btn btn-default" href="/editschedule/{{ schedule.id }}">Edit this schedule</a>
+                    {% if ismainschedule %}
+                    <span class="btn">This is your main schedule.</span>
+                    <a class="btn btn-default" href="#" onClick="alert('You can\'t delete your main schedule.');">Delete Schedule</a>
+                    {% else %}
+                    <a class="btn btn-default" href="/setmainschedule/{{ schedule.id }}">Set as main schedule</a>
+                    <a class="btn btn-default" href="/deleteschedule/{{ schedule.id }}">Delete Schedule</a>
+
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="input-group">
+            <input type="text" class="form-control datepicker" id="newdate" readonly="true">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="jumpdatebutton" onClick="redirect();">Go!</button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="scheduletitle col-md-12">{{ schedule.name }}</div>
+</div>
+<div class="row">
+    <div class="col-md-2 leftalign">
         <p>
-                <form>
-                    <input type="text" id="newdate" class="datepicker"></input>
-                    <button type="button" id="jumpdatebutton" onClick="redirect();">Go</button>
-                </form>
+            {% if comparing %}
+            <a class="btn btn-default vcenter" href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"-604800" }}"><span class="glyphicon glyphicon-chevron-left"></span> Previous Week</a>
+            {% else %}
+                <a class="btn btn-default" href="/schedule/{{ schedule.id }}/{{ starttime|add:"-604800" }}"><span class="glyphicon glyphicon-chevron-left"></span> Previous Week</a>
+            {% endif %}
+        </p>
+    </div>
+    <div class="col-md-8 centeralign">
+        <p>
+            {% if comparing %}
+                <a class="btn btn-default" href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}">This Week</a>
+            {% else %}
+                <a class="btn btn-default" href="/schedule/{{ schedule.id }}/">This Week</a>
+            {% endif %}
+        </p>
+    </div>
+    <div class="col-md-2 rightalign">
+        <p>
+            {% if comparing %}
+                <a class="btn btn-default" href="/schedule/{{ otheruser.id }}/compare/{{ viewinguser.id }}/{{ starttime|add:"604800" }}">Next Week <span class="glyphicon glyphicon-chevron-right"></span></a>
+            {% else %}
+                <a class="btn btn-default" href="/schedule/{{ schedule.id }}/{{ starttime|add:"604800" }}">Next Week <span class="glyphicon glyphicon-chevron-right"></span></a>
+            {% endif %}
         </p>
     </div>
 </div>

@@ -23,3 +23,19 @@ span.formWeek label
 	padding:0 .2em;
 }
 /*end- create event styling */
+
+.leftalign {
+    text-align:left;
+}
+div.row div.leftalign {
+    text-align:left;
+}
+.centeralign {
+    text-align:center;
+}
+.rightalign {
+    text-align:right;
+}
+.vcenter {
+    vertical-align:center;
+}
