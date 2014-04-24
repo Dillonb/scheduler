@@ -17,6 +17,13 @@
         ga('create', 'UA-50335137-1', 'dillonbeliveau.com');
         ga('send', 'pageview');
     </script>
+    <script>
+    $(function() {
+        $.get( "/friends/numrequests", function( data ) {
+            $("#numfriendrequests" ).html( data );
+        });
+    });
+    </script>
     <title>{% block title %}Main Page{% endblock %}</title>
     {% block head %}
     {% endblock %}
@@ -37,7 +44,7 @@
             <ul class="nav navbar-nav">
                 {% if user.is_authenticated %}
                 <li{% if request.path == '/accounts/profile/' %} class="active"{% endif %}><a href="/accounts/profile/">My Account</a></li>
-                <li{% if request.path == '/friends/' %} class="active"{% endif %}><a href="/friends/">Friends</a></li>
+                <li{% if request.path == '/friends/' %} class="active"{% endif %}><a href="/friends/">Friends <span class="badge" id="numfriendrequests"></span></a></li>
                 <li><a href="/accounts/logout">Logout</a></li>
                 {% else %}
                 <li{% if request.path == '/' %} class="active"{% endif %}><a href="/">Home</a></li>

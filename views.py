@@ -333,3 +333,9 @@ def stylesheet_view(request, styleid):
 
 def api_view(request, apikey, format, commandrequested):
     pass
+
+def num_friend_requests_view(request):
+    friend_requests = Friend.objects.friend_requests_pending_for_user(request.user)
+    if len(friend_requests) == 0:
+        return HttpResponse("")
+    return HttpResponse(str(len(friend_requests)))
