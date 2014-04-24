@@ -82,7 +82,7 @@ class Event(models.Model):
     saturday = models.BooleanField()
 
     name = models.CharField(max_length=50) # Name of the event. Short and sweet.
-    location = models.CharField(max_length=250) # The location of the event. Address?
+    location = models.CharField(max_length=250, blank=True) # The location of the event. Address?
     description = models.TextField(blank=True) # Description of event
 
     objects = EventManager()

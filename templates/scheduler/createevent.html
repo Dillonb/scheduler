@@ -27,10 +27,20 @@
     	<label for="id_start_time">Start time:</label> 
     	{{ form.start_time }}
     </span>
+{% if form.start_time.errors %}
+	<div class = "field-error">
+		{{form.start_time.errors}}
+	</div>
+{% endif %}
 	<span class = "formItem formTime" id = "endTime">
 		<label for="id_end_time">End time:</label> 
 		{{ form.end_time }}
 	</span>
+{% if form.end_time.errors %}
+	<div class = "field-error">
+		{{form.end_time.errors}}
+	</div>
+{% endif %}
 	<span class = "formItem formDate" id = "startDate">
 		<label for="id_start_date">Start date:</label> 
 		{{ form.start_date }}
