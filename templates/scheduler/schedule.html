@@ -167,15 +167,27 @@ Comparing your schedule to {{ otheruser.username }}'s
 
 
                 {% for event in dayevents %}
+                {% if isowner %}
+                <li class="eventmenucontainer" style="margin-top: {{ event.from_top }}px;">
+                        <div class="dropdown eventmenu">
+                            <a id="dropdownMenu{{ day.month }}_{{ day.day }}_id_{{ event.id }}" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu{{ day.month }}_{{ day.day }}_id_{{ event.id }}">
+                                <li><a href="/editevent/{{ event.id }}">Edit</a></li>
+                                <li><a href="#">Share</a></li>
+                                <li><a href="#">Delete</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% endif %}
                     <li class="event" style="margin-top: {{ event.from_top }}px; height: {{ event.height }}px;">
                     {% if not comparing %}
                         {% if isowner %}
-                            <a href="/editevent/{{ event.id }}">
+                            <div class="eventinfo">
                         {% endif %}
                                 {{ event.name }}
                                 {{ event.start_time }} - {{ event.end_time }}
                         {% if isowner %}
-                            </a>
+                            </div>
                         {% endif %}
                     {% endif %}
                     </li>

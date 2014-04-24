@@ -96,3 +96,26 @@ body .body {
 .scheduleinfo div {
     text-align:center;
 }
+.eventmenu {
+    z-index:1000;
+}
+.eventmenu ul li {
+    height:20px;
+}
+.eventmenu ul li a {
+    height: 20px;
+}
+.eventinfo {
+    margin-top:20px;
+}
+div.eventmenu .dropdown-toggle {
+    height:10px;
+    float:right;
+    text-align:right;
+    padding-right:10px;
+}
+.eventmenucontainer {
+    position:absolute;
+    width:199px;
+    height:auto;
+}
