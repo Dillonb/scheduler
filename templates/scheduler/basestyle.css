@@ -27,3 +27,19 @@ span.formWeek label
 form div.field-error {
 	display: inline-block;
 }
+
+.leftalign {
+    text-align:left;
+}
+div.row div.leftalign {
+    text-align:left;
+}
+.centeralign {
+    text-align:center;
+}
+.rightalign {
+    text-align:right;
+}
+.vcenter {
+    vertical-align:center;
+}

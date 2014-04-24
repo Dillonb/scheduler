@@ -88,3 +88,11 @@ li.timeblock {
 body .body {
     width: 1600px;
 }
+.scheduletitle {
+    text-align:center;
+    font-size:30pt;
+}
+
+.scheduleinfo div {
+    text-align:center;
+}
