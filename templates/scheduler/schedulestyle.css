@@ -97,7 +97,10 @@ body .body {
     text-align:center;
 }
 .eventmenu {
-    z-index:1000;
+    z-index:10;
+}
+ul.dropdown-menu {
+    z-index:20;
 }
 .eventmenu ul li {
     height:20px;
@@ -117,6 +120,20 @@ div.eventmenu .dropdown-toggle {
 .eventmenucontainer {
     position:absolute;
     width:20px;
-    margin-left:174px;
+    margin-left:176px;
     height:auto;
+}
+.eventmenubtn {
+    color:darkgray;
+    background-color:black;
+    border-radius:0px;
+    border:none;
+}
+div.eventmenu.open .eventmenubtn {
+    background-color:darkgray;
+    color:white;
+}
+
+div.eventmenu .eventmenubtn:hover {
+    background-color:darkgray;
 }
