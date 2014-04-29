@@ -45,7 +45,6 @@
                 {% if user.is_authenticated %}
                 <li{% if request.path == '/accounts/profile/' %} class="active"{% endif %}><a href="/accounts/profile/">My Account</a></li>
                 <li{% if request.path == '/friends/' %} class="active"{% endif %}><a href="/friends/">Friends <span class="badge" id="numfriendrequests"></span></a></li>
-                <li><a href="/accounts/logout">Logout</a></li>
                 {% else %}
                 <li{% if request.path == '/' %} class="active"{% endif %}><a href="/">Home</a></li>
                 <li{% if request.path == '/accounts/login/' %} class="active"{% endif %}><a href="/accounts/login/">Login</a></li>
@@ -53,7 +52,10 @@
                 {% endif %}
             </ul>
             {% if user.is_authenticated %}
-            <p class="navbar-text navbar-right"><a href="/user/{{ user.id }}">Signed in as {{ user }}</a></p>
+            <p class="navbar-text navbar-right">
+                <a href="/user/{{ user.id }}">Signed in as {{ user }}</a>
+                <a href="/accounts/logout">Logout</a>
+            </p>
             {% endif %}
         </div>
     </div>
