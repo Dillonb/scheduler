@@ -147,3 +147,6 @@ div.eventmenu.open .eventmenubtn {
 div.eventmenu .eventmenubtn:hover {
     background-color:darkgray;
 }
+#jumptodatecontainer {
+    max-width:300px;
+}
