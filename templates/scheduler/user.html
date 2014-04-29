@@ -39,19 +39,25 @@
     </div>
     <div class="panel-body">
         <ul id="schedule-list">
-            {% for schedule in schedules %}
-            <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a></li>
-            {% endfor %}
+            {% if schedules %}
+                {% for schedule in schedules %}
+                    <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a></li>
+                {% endfor %}
+            
             {% if friendsOnly %}
-            {% for friendsched in friendsOnly %}
-            <li><a href="/schedule/{{ friendsched.id }}">{{ friendsched }}</a></li>
-            {% endfor %}
+                {% for friendsched in friendsOnly %}
+                    <li><a href="/schedule/{{ friendsched.id }}">{{ friendsched }}</a></li>
+                {% endfor %}
             {% endif %}
+            
             {% if private %}
-            {% for priv in private %}
-            <li><a href="/schedule/{{ priv.id }}">{{ priv }}</a></li>
-            {% endfor %}
+                {% for priv in private %}
+                    <li><a href="/schedule/{{ priv.id }}">{{ priv }}</a></li>
+                {% endfor %}
             {% endif %}
+        {% else %}
+            <h4>{{ pageuser.username }} has no schedules which you can see.</h4>
+        {% endif %} 
         </ul>
     </div>
 </div>
