@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 
-def from_top_by_time(self, time):
+def from_top_by_time(time):
     fromtop = float(time.hour) + float(time.minute)/60.0 + float(time.second)/3600.0
     fromtop *= 50 # 50px for each hour
     return int(fromtop)
