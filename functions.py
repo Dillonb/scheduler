@@ -109,3 +109,8 @@ def get_schedule_time_for_user(schedule, user):
 def set_schedule_time_for_user(schedule, user, time):
     """Saves the data needed for the above function (the time the specified user was last viewing on the specified schedule."""
     cache.set(str(user.id)+"_"+str(schedule.id)+"_"+"_last_time", time, 3600)
+
+def from_top_by_time(self, time):
+    fromtop = float(time.hour) + float(time.minute)/60.0 + float(time.second)/3600.0
+    fromtop *= 50 # 50px for each hour
+    return int(fromtop)

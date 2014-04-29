@@ -179,7 +179,7 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
         for day in week:
             events.append((day, Event.objects.on_date(day, schedule)))
 
-        return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime, 'isowner':isOwner, 'ismainschedule':isMainSchedule})
+        return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime,'now':datetime.datetime.now(), 'isowner':isOwner, 'ismainschedule':isMainSchedule})
     else:
         raise Http404
 
