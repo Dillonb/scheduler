@@ -179,7 +179,7 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
 
         return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime, 'isowner':isOwner, 'ismainschedule':isMainSchedule})
     else:
-        return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
+        raise Http404
 
 @login_required
 def friends_view(request):
@@ -335,6 +335,8 @@ def api_view(request, apikey, format, commandrequested):
     pass
 
 def num_friend_requests_view(request):
+    if not request.user.is_authenticated():
+        return HttpResponse("")
     friend_requests = Friend.objects.friend_requests_pending_for_user(request.user)
     if len(friend_requests) == 0:
         return HttpResponse("")
