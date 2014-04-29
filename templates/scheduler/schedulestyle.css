@@ -16,8 +16,11 @@
 }
 /*Style for the current time line*/
 .timeLine {
+    background-color:rgba(0,0,0,0.1);
+    border-bottom: solid red 2px;
     position: absolute;
     width: 199px;
+    z-index: 1337;
 }
 /*end timeline style*/
 ul.scrolleddown .daycontainer {
