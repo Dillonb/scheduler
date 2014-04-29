@@ -360,3 +360,27 @@ def delete_event_view(request, eventid, confirm=False):
         parentschedule = event.schedule
         event.delete()
         return HttpResponseRedirect("/schedule/lasttime/"+str(parentschedule.id))
+
+def event_summary_view(request,eventid):
+    event = get_object_or_404(Event,id=eventid)
+    schedule = event.schedule
+
+    canView = False
+    isOwner = False
+    isMainSchedule = False
+    # Schedule is public, allow anyone to view it
+    if schedule.visibility == schedule.VISIBILITY_PUBLIC:
+        canView = True
+    elif schedule.visibility == schedule.VISIBILITY_FRIENDSONLY:
+        if request.user.is_authenticated():
+            #set canView true if the request user and schedule creator are friends:
+            if schedule.creator == request.user:
+                canView = True
+                isOwner = True
+            else:
+                canView = Friend.objects.are_friends(request.user, schedule.creator)
+            #if the request user is the creator set canView true:
+    if not canView:
+        return render(request, "scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
+
+    return render(request,"scheduler/eventview.html",{"event":event})

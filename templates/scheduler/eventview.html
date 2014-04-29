@@ -1,0 +1,7 @@
+{% extends "scheduler/base.html" %}
+{% block title %}Viewing event {{ event }}{% endblock %}
+{% block body %}
+<p>{{ event }}</p>
+<p>{{ event.description }}</p>
+<p>{{ event.location }}</p>
+{% endblock %}

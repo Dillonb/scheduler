@@ -24,4 +24,5 @@ urlpatterns = patterns('',
         url(r'^deleteschedule/(?P<scheduleid>\d+)$','scheduler.views.delete_schedule_view'),
         url(r'^stylesheet(?P<styleid>\d+)\.css$','scheduler.views.stylesheet_view'),
         url(r'^deleteevent/(?P<eventid>\d+)/(?P<confirm>confirm)?$','scheduler.views.delete_event_view'),
+        url(r'^viewevent/(?P<eventid>\d+)$','scheduler.views.event_summary_view'),
         )
