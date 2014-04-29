@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 from django.core.exceptions import ValidationError
+from functions import from_top_by_time
 
 
 class Schedule(models.Model):
@@ -109,16 +110,11 @@ class Event(models.Model):
     def weekdays(self):
         return [self.sunday, self.monday, self.tuesday, self.wednesday, self.thursday, self.friday, self.saturday]
 
-    def from_top_by_time(self, time):
-        fromtop = float(time.hour) + float(time.minute)/60.0 + float(time.second)/3600.0
-        fromtop *= 50 # 50px for each hour
-        return int(fromtop)
-
     def from_top(self):
-        return self.from_top_by_time(self.start_time)
+        return from_top_by_time(self.start_time)
 
     def height(self):
-        return self.from_top_by_time(self.end_time) - self.from_top_by_time(self.start_time)
+        return from_top_by_time(self.end_time) - from_top_by_time(self.start_time)
 
 class FriendManager(models.Manager):
     def are_friends(self, user, other):
