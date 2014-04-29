@@ -11,6 +11,11 @@ from scheduler.models import *
 from scheduler.functions import datetime_to_week, get_times_when_busy, get_schedule_time_for_user, set_schedule_time_for_user
 from itertools import chain
 
+def from_top_by_time(self, time):
+    fromtop = float(time.hour) + float(time.minute)/60.0 + float(time.second)/3600.0
+    fromtop *= 50 # 50px for each hour
+    return int(fromtop)
+
 def home_view(request):
     if request.user.is_authenticated():
         return redirect('/accounts/profile')
