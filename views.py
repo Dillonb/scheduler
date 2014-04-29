@@ -179,7 +179,7 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
 
         return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime, 'isowner':isOwner, 'ismainschedule':isMainSchedule})
     else:
-        return render(request,"scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
+        raise Http404
 
 @login_required
 def friends_view(request):
