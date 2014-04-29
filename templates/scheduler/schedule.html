@@ -174,8 +174,8 @@ Comparing your schedule to {{ otheruser.username }}'s
                                 href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">&#9776;</a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu{{ day.month }}_{{ day.day }}_id_{{ event.id }}">
                                 <li><a href="/editevent/{{ event.id }}">Edit</a></li>
-                                <li><a href="#">Share</a></li>
-                                <li><a href="#">Delete</a></li>
+                                <li><a href="/viewevent/{{ event.id }}">Share</a></li>
+                                <li><a href="/deleteevent/{{ event.id }}">Delete</a></li>
                             </ul>
                         </div>
                     </li>

@@ -1,0 +1,9 @@
+{% extends "scheduler/base.html" %}
+{% block title %}Delete event {{ event }}{% endblock %}
+{% block body %}
+<h1>
+Are you sure you want to delete this event?
+</h1>
+<a class="btn btn-default" href="/deleteevent/{{ event.id }}/confirm">Yes</a>
+<a class="btn btn-default" onClick="window.history.back()">No</a>
+{% endblock %}

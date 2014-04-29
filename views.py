@@ -341,3 +341,12 @@ def num_friend_requests_view(request):
     if len(friend_requests) == 0:
         return HttpResponse("")
     return HttpResponse(str(len(friend_requests)))
+
+def delete_event_view(request, eventid, confirm=False):
+    event = get_object_or_404(Event,id=eventid)
+    if not confirm:
+        return render(request, "scheduler/deleteevent.html", {"event":event})
+    else:
+        parentschedule = event.schedule
+        event.delete()
+        return HttpResponseRedirect("/schedule/"+str(parentschedule.id))
