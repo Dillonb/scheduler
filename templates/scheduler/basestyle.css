@@ -44,3 +44,21 @@ div.row div.leftalign {
 .vcenter {
     vertical-align:center;
 }
+
+.login form {
+	margin: auto;
+	width:60%;
+}
+
+.login {
+	padding: 100px;
+}
+
+.login input {
+	margin:auto;
+}
+
+.login label {
+	width:5.5em;
+}
+
