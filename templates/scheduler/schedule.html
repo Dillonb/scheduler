@@ -162,7 +162,7 @@ Comparing your schedule to {{ otheruser.username }}'s
     {% for day, dayevents in events %}
 
             <li class="daycontainer">
-            <ul class="day" id="{{ day.date|date:"mdo" }}">
+            <ul class="day{% if day.date|date:"mdo" == day.now|date:"mdo" %} today{% endif %}" id="{{ day.date|date:"mdo" }}">
                 <li class="header">{{day.date|date:"l"}} {{ day.date }} </li>
 
 
