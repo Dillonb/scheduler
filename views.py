@@ -132,7 +132,7 @@ def schedule_compare_view(request, otheruserid, viewinguserid, starttime=None):
 
         days.append((day, busy_times))
 
-    return render(request, "scheduler/schedule.html", {'events':days, 'now':datetime.datetime.now(), 'starttime':starttime,'otheruser':user1, 'viewinguser':user2, 'comparing':True})
+    return render(request, "scheduler/schedule.html", {'events':days, 'now_from_top':from_top_by_time(datetime.datetime.now()), 'starttime':starttime,'otheruser':user1, 'viewinguser':user2, 'comparing':True})
 
 def schedule_view(request, scheduleid, view=0, starttime=None):
     if starttime == None:
@@ -179,7 +179,7 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
         for day in week:
             events.append((day, Event.objects.on_date(day, schedule)))
 
-        return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime,'now':datetime.datetime.now(), 'isowner':isOwner, 'ismainschedule':isMainSchedule})
+        return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'now_from_top':from_top_by_time(datetime.datetime.now()), 'starttime':starttime, 'isowner':isOwner, 'ismainschedule':isMainSchedule})
     else:
         raise Http404
 
