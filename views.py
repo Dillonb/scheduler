@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from scheduler.forms import EventForm, ScheduleForm, AddFriendForm
 from django.contrib.auth.models import User
 from scheduler.models import *
-from scheduler.functions import datetime_to_week, get_times_when_busy
+from scheduler.functions import datetime_to_week, get_times_when_busy, get_schedule_time_for_user, set_schedule_time_for_user
 from itertools import chain
 
 def home_view(request):
@@ -57,7 +57,7 @@ def create_event_view(request,scheduleid):
             event = form.save(commit = False) # Get an event with the form data (don't commit to db yet)
             event.schedule = schedule # Set the parent schedule
             event.save() # NOW we can save to the database.
-            return redirect("/schedule/"+str(event.schedule.id))
+            return HttpResponseRedirect("/schedule/lasttime/"+str(event.schedule.id))
         else:
             return render(request, "scheduler/createevent.html",{'form':form,'schedule':schedule})
     else:
@@ -88,7 +88,7 @@ def edit_schedule_view(request, scheduleid):
         form = ScheduleForm(instance=schedule, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/schedule/"+str(schedule.id))
+            return HttpResponseRedirect("/schedule/lasttime/"+str(schedule.id))
         else:
             return render(request, "scheduler/createschedule.html",{'form':form, 'edit':'edit', 'schedule':schedule})
     else:
@@ -105,7 +105,7 @@ def edit_event_view(request, eventid):
         form = EventForm(instance=event,data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/schedule/"+str(event.schedule.id))
+            return HttpResponseRedirect("/schedule/lasttime/"+str(event.schedule.id))
         else:
             return render(request, "scheduler/createevent.html",{'form':form,'edit':'edit','event':event})
     else:
@@ -139,6 +139,8 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
         starttime = int(time.time())
     week = datetime.datetime.fromtimestamp(float(starttime))
     schedule = get_object_or_404(Schedule, id=scheduleid)
+    if request.user.is_authenticated():
+        set_schedule_time_for_user(schedule,request.user,starttime)
     canView = False
     isOwner = False
     isMainSchedule = False
@@ -180,6 +182,11 @@ def schedule_view(request, scheduleid, view=0, starttime=None):
         return render(request, "scheduler/schedule.html",{'schedule':schedule, 'events':events, 'starttime':starttime, 'isowner':isOwner, 'ismainschedule':isMainSchedule})
     else:
         raise Http404
+
+@login_required
+def schedule_last_time_view(request,scheduleid):
+    return HttpResponseRedirect("/schedule/"+str(scheduleid)+"/"+str(get_schedule_time_for_user(get_object_or_404(Schedule,id=scheduleid),request.user)))
+
 
 @login_required
 def friends_view(request):
@@ -301,6 +308,7 @@ def account_page_view(request, userid):
     #returns only public schedules: (Happens when user is not authenticated or user is not friends with the account we're viewing)
     return render(request, "scheduler/user.html",{'pageuser':user, 'schedules':schedules, 'main':main_schedule,'request_user_has_main_schedule':request_user_has_main_schedule})
 
+@login_required
 def set_main_schedule_view(request, scheduleid):
     schedule = get_object_or_404(Schedule, id=scheduleid)
     if not schedule.creator == request.user:
@@ -311,6 +319,7 @@ def set_main_schedule_view(request, scheduleid):
         profile.save()
         return redirect("/schedule/"+str(schedule.id))
 
+@login_required
 def delete_schedule_view(request, scheduleid):
     schedule = get_object_or_404(Schedule, id=scheduleid)
     if not schedule.creator == request.user:
@@ -342,6 +351,7 @@ def num_friend_requests_view(request):
         return HttpResponse("")
     return HttpResponse(str(len(friend_requests)))
 
+@login_required
 def delete_event_view(request, eventid, confirm=False):
     event = get_object_or_404(Event,id=eventid)
     if not confirm:
@@ -349,4 +359,4 @@ def delete_event_view(request, eventid, confirm=False):
     else:
         parentschedule = event.schedule
         event.delete()
-        return HttpResponseRedirect("/schedule/"+str(parentschedule.id))
+        return HttpResponseRedirect("/schedule/lasttime/"+str(parentschedule.id))

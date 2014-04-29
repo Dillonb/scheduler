@@ -1,4 +1,5 @@
 import datetime
+from django.core.cache import cache
 from scheduler.models import Profile, Event
 def datetime_to_week(dt):
         weekday = dt.weekday()
@@ -97,4 +98,14 @@ def get_times_when_busy(events):
     else:
         return events
 
+def get_schedule_time_for_user(schedule, user):
+    """Checks the database cache for information on what date the specified user was last viewing on the specified schedule."""
+    time=cache.get(str(user.id)+"_"+str(schedule.id)+"_"+"_last_time")
+    if time == None:
+        return ""
+    else:
+        return str(time)
 
+def set_schedule_time_for_user(schedule, user, time):
+    """Saves the data needed for the above function (the time the specified user was last viewing on the specified schedule."""
+    cache.set(str(user.id)+"_"+str(schedule.id)+"_"+"_last_time", time, 3600)
