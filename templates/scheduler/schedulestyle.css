@@ -132,12 +132,14 @@ div.eventmenu .dropdown-toggle {
     width:20px;
     margin-left:176px;
     height:auto;
+    z-index:9000;
 }
 .eventmenubtn {
     color:darkgray;
     background-color:black;
     border-radius:0;
     border:none;
+    z-index:9001;
 }
 div.eventmenu.open .eventmenubtn {
     background-color:darkgray;
