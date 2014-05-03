@@ -16,7 +16,12 @@
 <form action="/accounts/createschedule/" method="POST" accept-charset="utf-8">
 {% endif %}
     {% csrf_token %}
-    {{ form.as_p }}
+    {%for field in form %}
+<div class="control-group{%if field.errors %}error{%endif%}">
+{{ field.label_tag }} {{ field }}
+</div>
+{% endfor %}
+    
     <p><input type="submit" value="Submit"></p>
 </form>
 {% endblock %}

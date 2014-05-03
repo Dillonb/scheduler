@@ -6,30 +6,44 @@
 {% endif %}
 {% endblock %}
 {% block body %}
+
 {% if form.errors %}
-<p>Incorrect user/password</p>
+<p class="alert alert-danger">Your username and password didn't match.
+   Please try again.</p>
 {% endif %}
+
 <div class="login">
 	<form action="/accounts/login/" method="post">
 	    {% csrf_token %}
-	    <p>
-	    <label for="id_username">{{ form.username.label }}:</label>
-	    {{ form.username }}
-	    </p>
+		<div>
+			<span class = "formItem formUsername" id = "username">
+			    	<label for="username">Username:</label> 
+			    	{{ form.username }}
+			    </span>
+			{% if form.username.errors %}
+				<div class = "field-error">
+					{{form.username.errors}}
+				</div>
+			{% endif %}
+		</div>
 
-	    {{form.username.errors}}
+		<span class = "formItem formPassword" id = "password">
+		    	<label for="username">Password:</label> 
+		    	{{ form.password }}
+		    </span>
+		{% if form.password.errors %}
+			<div class = "field-error">
+				{{form.password.errors}}
+			</div>
+		{% endif %}
 
 
-	    
-	    <p>
-	    <label for="id_password">{{ form.password.label }}:</label>
-	    {{ form.password }}
-	    <div id="field-error">
-	   	{{form.password.errors}}
-	   	</div>
-	    </p>
-	    <input class="btn btn-default" type="submit" value="login">
-	    <input type="hidden" name="next" value="{{ next }}">
+
+
+		<div>
+		    <input class="btn btn-default" type="submit" value="login">
+		    <input type="hidden" name="next" value="{{ next }}">
+		</div>
 	</form>
 </div>
 {% endblock %}

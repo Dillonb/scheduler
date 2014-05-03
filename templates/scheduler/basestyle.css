@@ -29,6 +29,11 @@ form div.field-error {
 	display: inline-block;
 }
 
+form div.field-error ul {
+	list-style-type: none;
+	padding-left: 15px;
+}
+
 .leftalign {
     text-align:left;
 }
@@ -54,11 +59,19 @@ div.row div.leftalign {
 	padding: 100px;
 }
 
-.login input {
-	margin:auto;
-}
-
 .login label {
 	width:5.5em;
 }
 
+
+
+.login div input.btn {
+	margin: 20px 0px 0px 25px;
+
+}
+
+p.alert-danger {
+	text-align: center;
+	margin: 25px 25px -25px 25px;
+	padding: 15px;
+}
