@@ -3,8 +3,22 @@
 {% block body %}
 <form action="/friends/add/" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-	<input type="submit" value="Send Friend Request">
+    <h2 class="add-friend">Add a Friend</h2>
+	<div class="newfriend">
+		
+		<span>
+		    <label for="newfriend">Username:</label>
+		    {{ form.newfriend }}
+		</span>
 
+		{% if form.newfriend.errors %}
+			<div class = "field-error">
+				{{form.newfriend.errors}}
+			</div>
+		{% endif %}
+		<div>
+			<input class="btn btn-default" type="submit" value="Send Friend Request">
+		</div>
+	</div>
 </form>
 {% endblock %}

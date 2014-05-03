@@ -99,3 +99,25 @@ div.form-group input {
 div.form-group [for="id_visibility"] {
 	margin-right: 5px;
 }
+
+div.newfriend {
+	margin-top: 75px;
+	width: 50%;
+	margin-left:auto;
+	margin-right: auto;
+	padding-left: 175px;
+}
+
+div.newfriend div input {
+	margin: 15px 0px 0px 10px;
+
+}
+
+h2.add-friend {
+	width:20em;
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
