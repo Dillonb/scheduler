@@ -63,15 +63,39 @@ div.row div.leftalign {
 	width:5.5em;
 }
 
-
-
 .login div input.btn {
 	margin: 20px 0px 0px 25px;
-
 }
 
 p.alert-danger {
 	text-align: center;
 	margin: 25px 25px -25px 25px;
 	padding: 15px;
+}
+
+form.create-schedule {
+	padding: 100px;
+	width: 50%;
+	margin: auto;
+	margin-left: 350px;
+}
+
+h2.create-schedule-header {
+	text-align: center;
+	width: 100%;
+}
+
+div.form-group.error {
+	display: inline-block;
+}
+
+div.form-group label {
+	width: 4em;
+}
+
+div.form-group input {
+	margin-right: -5px;
+}
+div.form-group [for="id_visibility"] {
+	margin-right: 5px;
 }

@@ -9,16 +9,22 @@
 {% endblock %}
 {% block body %}
 {% if edit %}
-<h2>Editing Schedule: {{ schedule.name }}</h2>
-<form action="/editschedule/{{ schedule.id }}" method="POST" accept-charset="utf-8">
+
+<h2 class="create-schedule-header">Editing Schedule: {{ schedule.name }}</h2>
+<form class="create-schedule" action="/editschedule/{{ schedule.id }}" method="POST" accept-charset="utf-8">
 {% else %}
-<h2>Creating a New Schedule</h2>
-<form action="/accounts/createschedule/" method="POST" accept-charset="utf-8">
+<h2 class="create-schedule-header">Creating a New Schedule</h2>
+<form class="create-schedule" action="/accounts/createschedule/" method="POST" accept-charset="utf-8">
 {% endif %}
     {% csrf_token %}
     {%for field in form %}
-<div class="control-group{%if field.errors %}error{%endif%}">
+<div class="form-group{%if field.errors %} error{%endif%}">
 {{ field.label_tag }} {{ field }}
+</div>
+<div class="field-error">
+{% if field.errors %}
+{{ field.errors }}
+{% endif %}
 </div>
 {% endfor %}
     
