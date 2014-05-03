@@ -2,7 +2,61 @@
 {% block title %}Create Event{% endblock %}
 {% block head %}
 <script>
-    $(function() {
+    function twelveto24()
+    {
+        matchresults = $("#"+this.id).val().match(/^(\d\d?):?(\d\d)?\s?(am|pm|AM|PM)?$/);
+		if (matchresults != null)
+        {
+            hour = matchresults[1];
+            hour = parseInt(hour);
+            minute = matchresults[2];
+            if (minute != null)
+            {
+                minute = parseInt(minute);
+            }
+            meridiem = matchresults[3];
+            // Translate into 24 hour time.
+            if (meridiem == null)
+            {
+                if (hour < 5) // Assume PM if hour is less than 5
+                {
+                    //Because no meridiem was specified, add 12 hours to make it PM
+                    hour += 12;
+                }
+                // Otherwise nothing needs to be done with the hour.
+            }
+            else
+            {
+                meridiem = meridiem.toUpperCase();
+                if (meridiem == "PM")
+                {
+                    hour += 12; // To translate into 24 hour time
+                }
+
+                if (hour == 24) // This is done last to catch midnight
+                {
+                    hour = 0;
+                }
+            }
+            if (minute == null || minute == NaN)
+            {
+                minute = "00";
+            }
+            else
+            {
+                if (minute < 10)
+                {
+                    minute = ""+minute+"0";
+                }
+            }
+
+            $("#"+this.id).val(hour + ":" + minute);
+        }
+    }
+    $(document).ready(function()
+    {
+        $("#id_start_time").blur(twelveto24);
+        $("#id_end_time").blur(twelveto24);
         $(".datepicker").datepicker();
     });
 </script>
