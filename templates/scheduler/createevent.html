@@ -77,6 +77,7 @@
 	</div>
 {% endif %}
     {% csrf_token %}
+    <h3>When the event starts and ends each day.</h3>
     <span class = "formItem formTime" id = "startTime">
     	<label for="id_start_time">Start time:</label> 
     	{{ form.start_time }}
@@ -95,6 +96,7 @@
 		{{form.end_time.errors}}
 	</div>
 {% endif %}
+    <h3>The first and last day that the event occurs on.</h3>
 	<span class = "formItem formDate" id = "startDate">
 		<label for="id_start_date">Start date:</label> 
 		{{ form.start_date }}
@@ -113,34 +115,38 @@
 		{{form.end_date.errors}}
 	</div>
 {% endif %}
-	<span class = "formItem formWeek" id = "sunday">
-		{{ form.sunday }}
-		<label for="id_sunday"> Sunday</label>
-	</span>
-	<span class = "formItem formWeek" id = "monday">
-		{{ form.monday }}
-		<label for="id_monday"> Monday</label>
-	</span>
-	<span class = "formItem formWeek" id = "tuesday">
-		{{ form.tuesday }}
-		<label for="id_tuesday"> Tuesday</label>
-	</span>
-	<span class = "formItem formWeek" id = "wednesday">
-		{{ form.wednesday }}
-		<label for="id_wednesday"> Wednesday</label>
-	</span>
-	<span class = "formItem formWeek" id = "thursday">
-		{{ form.thursday }}
-		<label for="id_thursday"> Thursday</label>
-	</span>
-	<span class = "formItem formWeek" id = "friday">
-		{{ form.friday }}
-		<label for="id_friday"> Friday</label>
-	</span>
-	<span class = "formItem formWeek" id = "saturday">
-		{{ form.saturday }}
-		<label for="id_saturday"> Saturday</label>
-	</span>
+    <h3>What days of the week the event occurs on.</h3>
+    <div class="btn-group">
+        <span class = "formItem formWeek" id = "sunday">
+            {{ form.sunday }}
+            <label for="id_sunday"> Sunday</label>
+        </span>
+        <span class = "formItem formWeek" id = "monday">
+            {{ form.monday }}
+            <label for="id_monday"> Monday</label>
+        </span>
+        <span class = "formItem formWeek" id = "tuesday">
+            {{ form.tuesday }}
+            <label for="id_tuesday"> Tuesday</label>
+        </span>
+        <span class = "formItem formWeek" id = "wednesday">
+            {{ form.wednesday }}
+            <label for="id_wednesday"> Wednesday</label>
+        </span>
+        <span class = "formItem formWeek" id = "thursday">
+            {{ form.thursday }}
+            <label for="id_thursday"> Thursday</label>
+        </span>
+        <span class = "formItem formWeek" id = "friday">
+            {{ form.friday }}
+            <label for="id_friday"> Friday</label>
+        </span>
+        <span class = "formItem formWeek" id = "saturday">
+            {{ form.saturday }}
+            <label for="id_saturday"> Saturday</label>
+        </span>
+    </div>
+    <h3>General information about the event.</h3>
 	<span class = "formItem formMisc" id = "nameField">
 		<label for="id_name">Name:</label> 
 		{{ form.name }}

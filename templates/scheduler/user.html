@@ -20,16 +20,18 @@
         <h3 class="panel-title">Main Schedule</h3>
     </div>
     <div class="panel-body">
-        <a href="/schedule/{{ main.id }}">{{ main }}</a>
-        {% if is_self %}
-        {% else %}
-            {% if request_user_has_main_schedule %}
-            |
-            <a href="/schedule/{{ pageuser.id }}/compare/{{ request.user.id }}">
-                Compare to my main schedule
-            </a>
+        <div class="btn-group">
+            <a class="btn btn-default" href="/schedule/{{ main.id }}">{{ main }}</a>
+            {% if is_self %}
+            {% else %}
+                {% if request_user_has_main_schedule %}
+                |
+                <a class="btn btn-default" href="/schedule/{{ pageuser.id }}/compare/{{ request.user.id }}">
+                    Compare to my main schedule
+                </a>
+                {% endif %}
             {% endif %}
-        {% endif %}
+        </div>
     </div>
 </div>
 {% endif %}
