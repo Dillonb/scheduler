@@ -121,3 +121,6 @@ h2.add-friend {
 	text-align: center;
 }
 
+ul.schedule-list {
+    padding-left:0px;
+}

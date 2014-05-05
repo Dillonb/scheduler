@@ -34,7 +34,7 @@
         {% if schedules %}
         <ul class="list-group">
             {% for schedule in schedules %}
-            <li class="list-group-item row">
+            <li class="list-group-item">
                 <a class="btn" href="/schedule/{{ schedule.id }}">{{ schedule }} - {{ schedule.get_visibility_display }} </a>
             </li>
             {% endfor %}
