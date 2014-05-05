@@ -287,6 +287,20 @@ def friends_add_view(request):
 
     return render(request, "scheduler/addfriend.html", {"form":form})
 
+@login_required
+def friends_remove_view(request, friendid, confirm=False):
+    friend = get_object_or_404(Friend,id=friendid)
+    if not confirm:
+        if friend.creator == request.user:
+            friend.other = 0
+        elif friend.friend == request.user:
+            friend.other = 1
+        else:
+            raise Http404 # The user is not the owner of this friend object.
+        return render(request, "scheduler/removefriend.html",{"friend":friend})
+    else:
+        friend.delete()
+        return HttpResponseRedirect("/friends/")
 
 def account_page_view(request, userid):
     #Get all the schedules from the user indicated:
