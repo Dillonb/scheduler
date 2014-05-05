@@ -1,7 +1,18 @@
 {% extends "scheduler/base.html" %}
 {% block title %}Viewing event {{ event }}{% endblock %}
 {% block body %}
-<p>{{ event }}</p>
-<p>{{ event.description }}</p>
-<p>{{ event.location }}</p>
+{% if user.is_authenticated %}
+<a class="btn btn-default" href="/schedule/lasttime/{{ event.schedule.id }}">Back</a>
+{% else %}
+<a class="btn btn-default" onClick="window.history.back()">Back</a>
+{% endif %}
+<h2 class="summary">{{ event.name }}</h2>
+<h3 class="summary">{{ event.start_time }} - {{ event.end_time }}</h3>
+<p class="summary">{{ event.description }}</p>
+<p class="summary">{{ event.location }}</p>
+{% if user.is_authenticated %}
+<a class="btn btn-default" href="/schedule/lasttime/{{ event.schedule.id }}">Back</a>
+{% else %}
+<a class="btn btn-default" onClick="window.history.back()">Back</a>
+{% endif %}
 {% endblock %}
