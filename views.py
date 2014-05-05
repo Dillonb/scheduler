@@ -38,6 +38,9 @@ def register_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
+
+            new_user = authenticate(username=request.POST.get('username',False), password=request.POST.get('password1',False))
+            login(request, new_user)
             return HttpResponseRedirect("/")
     else:
         form = UserCreationForm()
