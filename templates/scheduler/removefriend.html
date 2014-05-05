@@ -1,0 +1,9 @@
+{% extends "scheduler/base.html" %}
+{% block title %}Remove friend {{ friend.friend_user }}{% endblock %}
+{% block body %}
+<h1>
+    Are you sure you want to remove {{ friend.friend_user }} as a friend?
+</h1>
+<a class="btn btn-default" href="/friends/remove/{{ friend.id }}/confirm">Yes</a>
+<a class="btn btn-default" onClick="window.history.back()">No</a>
+{% endblock %}
