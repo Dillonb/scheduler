@@ -32,9 +32,11 @@
     </div>
     <div class="panel-body">
         {% if schedules %}
-        <ul>
+        <ul class="list-group">
             {% for schedule in schedules %}
-            <li><a href="/schedule/{{ schedule.id }}">{{ schedule }}</a> - {{ schedule.get_visibility_display }} </li>
+            <li class="list-group-item row">
+                <a class="btn" href="/schedule/{{ schedule.id }}">{{ schedule }} - {{ schedule.get_visibility_display }} </a>
+            </li>
             {% endfor %}
         </ul>
         {% else %}
