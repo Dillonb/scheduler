@@ -61,7 +61,8 @@ ul.scrolleddown li.timelegend ul.timelegend li.header {
 }
 ul.timelegend .header {
     width:50px;
-    background-color:white;
+    background-color: #E9EAED;
+    color: #E9EAED;
     border-bottom-style:solid;
     border-bottom-color:black;
     border-bottom-width:2px;
