@@ -15,6 +15,11 @@
     <div class="panel-body">
         <p><a href="/accounts/createschedule/">Create a New Schedule</a></p>
         <p><a href="/user/{{ user.id }}">View My Public Profile</a></p>
+        {% if request_user_has_main_schedule %}
+        <p><a href="/schedule/{{ main_schedule.id }}">{{ main_schedule }}</a></p>
+        {% else %}
+        <p>You have no main schedule.</p>
+        {% endif %}
     </div>
 </div>
 <div class="panel panel-default">

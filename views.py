@@ -50,8 +50,17 @@ def register_view(request):
 
 @login_required
 def account_view(request):
+    request_user_has_main_schedule = False
+    # If they're not authenticated, they can't possibly have a main schedule.
+    if request.user.is_authenticated():
+        # Check the request user's profile to see if they have a main schedule.
+        request_user_profile = Profile.objects.of_user(request.user)
+        # If the request user's main schedule is NOT None, then they have a main schedule.
+        if not request_user_profile.main_schedule == None:
+            request_user_has_main_schedule = True
+    main_schedule = Profile.objects.of_user(request.user).main_schedule
     schedules = Schedule.objects.filter(creator=request.user)
-    return render(request, "scheduler/account.html",{'schedules':schedules})
+    return render(request, "scheduler/account.html",{'schedules':schedules, 'main_schedule':main_schedule, 'request_user_has_main_schedule':request_user_has_main_schedule})
 
 @login_required
 def create_event_view(request,scheduleid):
