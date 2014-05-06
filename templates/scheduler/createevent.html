@@ -126,7 +126,7 @@
 		{{ form.non_field_errors }}
 	</div>
 {% endif %}
-    <span class = "formItem formMisc" id = "submitButton"><input type="submit" class="btn btn-default" value="Save"></span>
+    <span class = "formItem formMisc submitButton"><input type="submit" class="btn btn-default" value="Save"></span>
     {% csrf_token %}
     <h3>When the event starts and ends each day.</h3>
     <span class = "formItem formTime" id = "startTime">
@@ -215,6 +215,6 @@
 		<label for="id_description">Description:</label> 
 		{{ form.description }}
 	</span>
-    <span class = "formItem formMisc" id = "submitButton"><input type="submit" class="btn btn-default" value="Save"></span>
+    <span class = "formItem formMisc submitButton"><input type="submit" class="btn btn-default" value="Save"></span>
 </form>
 {% endblock %}
