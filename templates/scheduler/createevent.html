@@ -71,7 +71,8 @@
             
             var str = "#id_";
             str += weekday[dayOfWeek];
-            $(str).attr('checked','checked');
+            $(str).attr('checked','checked'); //Can probably remove this.
+            $(str).prop("checked", true);
         }
     }
 
@@ -90,7 +91,8 @@
 
         for(var i=0; i<6; i++){
             str += weekday[i];
-            $(str).attr('checked', false);
+            $(str).attr('checked', false); //Can probably remove this. 
+            $(str).prop("checked", false);
             str = "#id_";
         }
     }   
