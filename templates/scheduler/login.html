@@ -17,7 +17,7 @@
 	    {% csrf_token %}
 		<div>
 			<span class = "formItem formUsername" id = "username">
-			    	<label for="username">Username:</label> 
+			    	<label for="id_username">Username:</label> 
 			    	{{ form.username }}
 			    </span>
 			{% if form.username.errors %}
@@ -28,7 +28,7 @@
 		</div>
 
 		<span class = "formItem formPassword" id = "password">
-		    	<label for="username">Password:</label> 
+		    	<label for="id_password">Password:</label> 
 		    	{{ form.password }}
 		    </span>
 		{% if form.password.errors %}
