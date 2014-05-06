@@ -124,3 +124,20 @@ h2.add-friend {
 ul.schedule-list {
     padding-left:0px;
 }
+
+h2.summary {
+    font-family: serif;
+    font-size: 3em;
+    border-bottom: solid #000 1px;
+    margin-bottom: .5em;
+}
+
+h3.summary {
+    font-size: 1.5em;
+    margin-top: .5em;
+}
+
+p.summary {
+    text-indent: .5em;
+    font-size: 1em;
+}
