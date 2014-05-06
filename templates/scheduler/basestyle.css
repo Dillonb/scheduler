@@ -15,15 +15,21 @@ p.navbar-text.navbar-right a:hover {
 }
 
 /*End - Username Link in Nav*/
-/*create event form styling*/
-span.formTime::before, span.formDate::before, span.formMisc::before{content: "\a"; white-space: pre;}
+/*form styling*/
+span.formTime::before, span.formDate::before, span.formMisc::before, span.formReg::before{content: "\a"; white-space: pre;}
 span.formItem label{width:6em;}
 span.formWeek label
 {
 	width: auto;
 	padding:0 .2em;
 }
-/*end- create event styling */
+p.helptext {
+    display: inline-block;
+}
+input#thatSubmitButton {
+    display: block;
+}
+/*end- form styling */
 
 form div.field-error {
 	display: inline-block;

@@ -348,7 +348,7 @@ def set_main_schedule_view(request, scheduleid):
         profile = Profile.objects.of_user(request.user)
         profile.main_schedule = schedule
         profile.save()
-        return redirect("/schedule/"+str(schedule.id))
+        return redirect("/schedule/lasttime/"+str(schedule.id))
 
 @login_required
 def delete_schedule_view(request, scheduleid):
@@ -410,7 +410,11 @@ def event_summary_view(request,eventid):
                 isOwner = True
             else:
                 canView = Friend.objects.are_friends(request.user, schedule.creator)
-            #if the request user is the creator set canView true:
+    elif schedule.visibility == schedule.VISIBILITY_PRIVATE:
+        #if the request user is the creator set canView true:
+        if request.user == schedule.creator:
+            canView = True
+
     if not canView:
         return render(request, "scheduler/errorpage.html",{'message':"PERMISSION DENIED"})
 

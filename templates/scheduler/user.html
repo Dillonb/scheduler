@@ -25,7 +25,6 @@
             {% if is_self %}
             {% else %}
                 {% if request_user_has_main_schedule %}
-                |
                 <a class="btn btn-default" href="/schedule/{{ pageuser.id }}/compare/{{ request.user.id }}">
                     Compare to my main schedule
                 </a>
