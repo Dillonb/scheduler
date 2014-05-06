@@ -348,7 +348,7 @@ def set_main_schedule_view(request, scheduleid):
         profile = Profile.objects.of_user(request.user)
         profile.main_schedule = schedule
         profile.save()
-        return redirect("/schedule/"+str(schedule.id))
+        return redirect("/schedule/lasttime/"+str(schedule.id))
 
 @login_required
 def delete_schedule_view(request, scheduleid):
