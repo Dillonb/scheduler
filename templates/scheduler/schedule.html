@@ -167,6 +167,9 @@ Comparing your schedule to {{ otheruser.username }}'s
                 {% if day.date|date:"mdo" == day.now|date:"mdo" %}
                     <li class="timeLine" style="height:{{ now_from_top }}px"></li>
                 {% endif %}
+                {% if day.date|date:"omd" < day.now|date:"omd" %}
+                    <li class="pastDay"></li>
+                {% endif %}
 
                 {% for event in dayevents %}
                 {% if isowner %}
